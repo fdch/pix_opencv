@@ -14,8 +14,9 @@
 //    WARRANTIES, see the file, "GEM.LICENSE.TERMS" in this distribution.
 //
 /////////////////////////////////////////////////////////
-// based on code written by Lluis Gomez i Bigorda ( lluisgomez _at_ hangar _dot_ org ) (pix_opencv)
-// Template for pix_opencv class
+// based on code written by Lluis Gomez i Bigorda 
+// ( lluisgomez _at_ hangar _dot_ org ) 
+// (pix_opencv) Template for pix_opencv class
 
 #if HAVE_BGSUB
 #include "pix_opencv_backgroundsubtractor.h"
@@ -38,9 +39,11 @@ pix_opencv_backgroundsubtractor :: pix_opencv_backgroundsubtractor() : m_forceCP
   
   m_bgsub_algos.push_back("BackgroundSubtractor.GMG");
   m_bgsub_algos.push_back("BackgroundSubtractor.MOG");
-  
-  m_fgbgGMG = bgsegm::createBackgroundSubtractorGMG();
-  m_fgbgMOG = bgsegm::createBackgroundSubtractorMOG();
+
+
+
+  m_fgbgGMG = cv::bgsegm::createBackgroundSubtractorGMG();
+  m_fgbgMOG = cv::bgsegm::createBackgroundSubtractorMOG();
   
   m_dataout = outlet_new(this->x_obj, 0); 
 

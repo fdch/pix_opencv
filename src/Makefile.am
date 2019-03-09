@@ -10,6 +10,7 @@ pix_opencv_la_include_HEADERS = Blob.hpp \
 					blobtrack.h \
 					pix_opencv_athreshold.h \
 					pix_opencv_bgsubstract.h \
+					pix_opencv_backgroundsubtractor.h \
 					pix_opencv_camshift.h \
 					pix_opencv_clahe.h \
 					pix_opencv_colorfilt.h \
@@ -44,6 +45,7 @@ pix_opencv_la_SOURCES = pix_opencv_edge.cc \
 				  pix_opencv_morphology.cc \
 				  pix_opencv_distrans.cc \
 				  pix_opencv_haarcascade.cc \
+				  pix_opencv_backgroundsubtractor.cc \
 				  pix_opencv_contours_boundingrect.cc \
 				  pix_opencv_bgsubstract.cc \
 				  pix_opencv_contours_convexity.cc \

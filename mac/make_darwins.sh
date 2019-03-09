@@ -13,7 +13,7 @@ ROOT=$(pwd)
 SRCDIR=$ROOT/src
 
 TARGET=pix_opencv
-TARGET_PATH=~/Documents/Pd/externals
+TARGET_PATH=~/Library/Pd/externals
 TARGET_DIR=$TARGET_PATH/$TARGET
 
 #	Where .o reside
@@ -141,6 +141,7 @@ function make_binaries()
 
 #	this is harcoded from the libtool compile instruction when running make
 HEADERS=" \
+CPPFLAGS=-std=c++11 \
 -DPACKAGE_NAME=\"$TARGET\" \
 -DPACKAGE_TARNAME=\"$TARGET\" \
 -DPACKAGE_VERSION=\"0.4\" \

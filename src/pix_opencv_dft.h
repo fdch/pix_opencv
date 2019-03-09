@@ -13,6 +13,52 @@ LOG
 
 -----------------------------------------------------------------*/
 
+/*!
+ *
+ *
+ * \brief discrete fourier transform
+ *
+ * KEYWORDS: dft
+ *
+ * DESCRIPTION:
+ *
+ * Bang to calculate the Discrete Fourier Transform of the incoming image.
+ * This can be used for pattern matching.
+ * 
+ * ARGUMENTS: None
+ *
+ * INLET:
+ *
+ * GEM-SPECIFIC:
+ *
+ * (float), (list) gemlist
+ *
+ * (float):
+ *
+ * 0 : bypass object rendering
+ *
+ * 1 : render (default)
+ *
+ * (list) gemlist:
+ *
+ * The Gem list message...
+ *
+ * OBJECT-SPECIFIC:
+ *
+ * OUTLET:
+ *
+ * GEM-SPECIFIC:
+ *
+ * (list) gemlist...
+ *
+ * DECLARE: declare -lib Gem -path "pix_opencv"
+ *
+ * CREATOR(S):
+ *
+ * written by yves degoyon ( ydegoyon@gmail.com )
+ *
+ * revised by fdch.github.io 2019
+*/
 #ifndef INCLUDE_PIX_OPENCV_DFT_H_
 #define INCLUDE_PIX_OPENCV_DFT_H_
 
@@ -23,42 +69,29 @@ LOG
 
 #include "Base/GemPixObj.h"
 
-/*-----------------------------------------------------------------
--------------------------------------------------------------------
-CLASS
-    pix_opencv_dft
-    
-    Discrete Fourier Transform
-
-KEYWORDS
-    pix
-    
-DESCRIPTION
-   
------------------------------------------------------------------*/
 class GEM_EXPORT pix_opencv_dft : public GemPixObj
 {
     CPPEXTERN_HEADER(pix_opencv_dft, GemPixObj)
 
     public:
 
-	//////////
-	// Constructor
-    	pix_opencv_dft();
-    	
+        //////////
+        // Constructor
+        pix_opencv_dft();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_dft();
-
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
-
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_dft();
+    
+        //////////
+        // Do the processing
+        virtual void processRGBAImage(imageStruct &image);
+        virtual void processRGBImage(imageStruct &image);
+        virtual void processYUVImage(imageStruct &image);
+        virtual void processGrayImage(imageStruct &image); 
+    
         int comp_xsize;
         int comp_ysize;
         int x_calculate;
@@ -67,23 +100,22 @@ class GEM_EXPORT pix_opencv_dft : public GemPixObj
 
     private:
     
-    	//////////
-    	// Static member functions
-    	static void 	calculateCallback(void *data);
-        static void     shiftDFT(CvArr*, CvArr*);
+        //////////
+        // Static member functions
+        static void calculateCallback(void *data);
+        static void shiftDFT(CvArr*, CvArr*);
 
-	// The output and temporary images
-        IplImage  *rgb;
-        IplImage  *rgba;
-        IplImage  *gray;
-        IplImage  *input_re;
-        IplImage  *input_im;
-        IplImage  *input_co;
-        CvMat     *dft_A;
-        IplImage  *image_re;
-        IplImage  *image_im;
-        IplImage  *image_mout;
-	
+        // The output and temporary images
+        IplImage *rgb;
+        IplImage *rgba;
+        IplImage *gray;
+        IplImage *input_re;
+        IplImage *input_im;
+        IplImage *input_co;
+        CvMat    *dft_A;
+        IplImage *image_re;
+        IplImage *image_im;
+        IplImage *image_mout;
 };
 
-#endif	// for header file
+#endif    // for header file

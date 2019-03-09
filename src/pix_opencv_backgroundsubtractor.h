@@ -16,11 +16,12 @@ LOG
 #ifndef INCLUDE_PIX_OPENCV_BACKGROUNDSUBTRACTOR_H_
 #define INCLUDE_PIX_OPENCV_BACKGROUNDSUBTRACTOR_H_
 
-#include <opencv2/bgsegm.hpp>
-
 #include "Base/GemPixObj.h"
 #include <RTE/MessageCallbacks.h>
 #include "Gem/Exception.h"
+
+#include "opencv2/video.hpp"
+#include "opencv2/bgsegm.hpp"
 
 #include <iostream>
 #include <functional>
@@ -30,7 +31,9 @@ LOG
 CLASS
     pix_opencv_backgroundsubtractor
     
-    generic dynamic background subtractor, should implement severals algo
+    generic dynamic background subtractor, 
+    should implement severals algo
+
 KEYWORDS
     pix
     
@@ -43,9 +46,9 @@ class GEM_EXPORT pix_opencv_backgroundsubtractor: public GemPixObj
 
   public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_backgroundsubtractor();
+	  //////////
+	  // Constructor
+    pix_opencv_backgroundsubtractor();
     	
   protected:
   
