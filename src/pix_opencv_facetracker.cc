@@ -25,36 +25,36 @@ using namespace FACETRACKER;
 CPPEXTERN_NEW(pix_opencv_facetracker)
 
 static std::vector<int> consecutive(int start, int end) {
-	int n = end - start;
-	std::vector<int> result(n);
-	for(int i = 0; i < n; i++) {
-		result[i] = start + i;
-	}
-	return result;
+    int n = end - start;
+    std::vector<int> result(n);
+    for(int i = 0; i < n; i++) {
+        result[i] = start + i;
+    }
+    return result;
 }
 
 std::vector<int> pix_opencv_facetracker::getFeatureIndices(int feature) {
-	switch(feature) {
-		case LEFT_JAW: return consecutive(0, 9);
-		case RIGHT_JAW: return consecutive(8, 17);
-		case JAW: return consecutive(0, 17);
-		case LEFT_EYEBROW: return consecutive(17, 22);
-		case RIGHT_EYEBROW: return consecutive(22, 27);
-		case LEFT_EYE: return consecutive(36, 42);
-		case RIGHT_EYE: return consecutive(42, 48);
-		case OUTER_MOUTH: return consecutive(48, 60);
-		case INNER_MOUTH: {
-			static int innerMouth[] = {48,60,61,62,54,63,64,65};
-			return std::vector<int>(innerMouth, innerMouth + 8);
-		}
-		case NOSE_BRIDGE: return consecutive(27, 31);
-		case NOSE_BASE: return consecutive(31, 36);
-		case FACE_OUTLINE: {
-			static int faceOutline[] = {17,18,19,20,21,22,23,24,25,26, 16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0};
-			return std::vector<int>(faceOutline, faceOutline + 27);
-		}
-		case ALL_FEATURES: return consecutive(0, 66);
-	}
+    switch(feature) {
+        case LEFT_JAW: return consecutive(0, 9);
+        case RIGHT_JAW: return consecutive(8, 17);
+        case JAW: return consecutive(0, 17);
+        case LEFT_EYEBROW: return consecutive(17, 22);
+        case RIGHT_EYEBROW: return consecutive(22, 27);
+        case LEFT_EYE: return consecutive(36, 42);
+        case RIGHT_EYE: return consecutive(42, 48);
+        case OUTER_MOUTH: return consecutive(48, 60);
+        case INNER_MOUTH: {
+            static int innerMouth[] = {48,60,61,62,54,63,64,65};
+            return std::vector<int>(innerMouth, innerMouth + 8);
+        }
+        case NOSE_BRIDGE: return consecutive(27, 31);
+        case NOSE_BASE: return consecutive(31, 36);
+        case FACE_OUTLINE: {
+            static int faceOutline[] = {17,18,19,20,21,22,23,24,25,26, 16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0};
+            return std::vector<int>(faceOutline, faceOutline + 27);
+        }
+        case ALL_FEATURES: return consecutive(0, 66);
+    }
 }
 
 /////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ pix_opencv_facetracker :: pix_opencv_facetracker() :  m_fcheck(false), \
                                                       m_taboutput(0), \
                                                       m_autoresize(0)
 { 
-	m_dataout = outlet_new(this->x_obj, 0);
+    m_dataout = outlet_new(this->x_obj, 0);
 
   //set other tracking parameters
   m_wSize1.push_back(7);
@@ -92,7 +92,7 @@ pix_opencv_facetracker :: pix_opencv_facetracker() :  m_fcheck(false), \
   
   m_tracker.Load((std::string(basename) + "/model/face2.tracker").c_str());
   m_tri = IO::LoadTri((std::string(basename) + "/model/face.tri").c_str());
-	m_con = IO::LoadCon((std::string(basename) + "/model/face.con").c_str()); 
+    m_con = IO::LoadCon((std::string(basename) + "/model/face.con").c_str()); 
 }
 
 /////////////////////////////////////////////////////////
@@ -162,19 +162,19 @@ void pix_opencv_facetracker :: Draw(cv::Mat &image,cv::Mat &shape,cv::Mat &con,c
        visi.at<int>(tri.at<int>(i,1),0) == 0 ||
        visi.at<int>(tri.at<int>(i,2),0) == 0)continue;
     p1 = cv::Point(shape.at<double>(tri.at<int>(i,0),0),
-		   shape.at<double>(tri.at<int>(i,0)+n,0));
+           shape.at<double>(tri.at<int>(i,0)+n,0));
     p2 = cv::Point(shape.at<double>(tri.at<int>(i,1),0),
-		   shape.at<double>(tri.at<int>(i,1)+n,0));
+           shape.at<double>(tri.at<int>(i,1)+n,0));
     cv::line(image,p1,p2,c);
     p1 = cv::Point(shape.at<double>(tri.at<int>(i,0),0),
-		   shape.at<double>(tri.at<int>(i,0)+n,0));
+           shape.at<double>(tri.at<int>(i,0)+n,0));
     p2 = cv::Point(shape.at<double>(tri.at<int>(i,2),0),
-		   shape.at<double>(tri.at<int>(i,2)+n,0));
+           shape.at<double>(tri.at<int>(i,2)+n,0));
     cv::line(image,p1,p2,c);
     p1 = cv::Point(shape.at<double>(tri.at<int>(i,2),0),
-		   shape.at<double>(tri.at<int>(i,2)+n,0));
+           shape.at<double>(tri.at<int>(i,2)+n,0));
     p2 = cv::Point(shape.at<double>(tri.at<int>(i,1),0),
-		   shape.at<double>(tri.at<int>(i,1)+n,0));
+           shape.at<double>(tri.at<int>(i,1)+n,0));
     cv::line(image,p1,p2,c);
   }
   //draw connections
@@ -183,9 +183,9 @@ void pix_opencv_facetracker :: Draw(cv::Mat &image,cv::Mat &shape,cv::Mat &con,c
     if(visi.at<int>(con.at<int>(0,i),0) == 0 ||
        visi.at<int>(con.at<int>(1,i),0) == 0)continue;
     p1 = cv::Point(shape.at<double>(con.at<int>(0,i),0),
-		   shape.at<double>(con.at<int>(0,i)+n,0));
+           shape.at<double>(con.at<int>(0,i)+n,0));
     p2 = cv::Point(shape.at<double>(con.at<int>(1,i),0),
-		   shape.at<double>(con.at<int>(1,i)+n,0));
+           shape.at<double>(con.at<int>(1,i)+n,0));
     cv::line(image,p1,p2,c,1);
   }
   //draw points
@@ -200,7 +200,7 @@ void pix_opencv_facetracker :: Draw(cv::Mat &image,cv::Mat &shape,cv::Mat &con,c
 // processImage
 //
 /////////////////////////////////////////////////////////
-    	
+        
 void pix_opencv_facetracker :: processImage(imageStruct &image)
 { 
   cv::Mat gray, im;

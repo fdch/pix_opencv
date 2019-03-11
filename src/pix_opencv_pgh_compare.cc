@@ -437,11 +437,11 @@ void pix_opencv_pgh_compare :: processYUV_YUV(imageStruct &left, imageStruct &ri
 void pix_opencv_pgh_compare :: obj_setupCallback(t_class *classPtr)
 { 
   class_addmethod(classPtr, (t_method)&pix_opencv_pgh_compare::floatMinSizeMessCallback,
-		  gensym("minsize"), A_FLOAT, A_NULL);
+          gensym("minsize"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_pgh_compare::clearMessCallback,
-		  gensym("clear"), A_NULL);
+          gensym("clear"), A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_pgh_compare::floatCriteriaMessCallback,
-		  gensym("criteria"), A_FLOAT, A_NULL);
+          gensym("criteria"), A_FLOAT, A_NULL);
 }
 
 void pix_opencv_pgh_compare :: floatMinSizeMessCallback(void *data, t_floatarg minsize)

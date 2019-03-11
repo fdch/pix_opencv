@@ -343,7 +343,7 @@ void pix_opencv_hough_lines :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_hough_lines : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_hough_lines :: processGrayImage(imageStruct &image)
 { 
   int i, ulines;

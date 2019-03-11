@@ -39,8 +39,8 @@ void pix_opencv_knear :: findX(IplImage* imgSrc,int* min, int* max)
   int i;
   int minFound=0;
   CvMat data;
-  CvScalar maxVal=cvRealScalar(imgSrc->width * 255);
-  CvScalar val=cvRealScalar(0);
+  CvScalar maxVal = cvRealScalar(imgSrc->width * 255);
+  CvScalar val    = cvRealScalar(0);
 
   // for each col sum, if sum < width*255 then we find the min
   // then continue to end to search the max, if sum< width*255 then is new max
@@ -66,8 +66,8 @@ void pix_opencv_knear :: findY(IplImage* imgSrc,int* min, int* max)
   int i;
   int minFound=0;
   CvMat data;
-  CvScalar maxVal=cvRealScalar(imgSrc->width * 255);
-  CvScalar val=cvRealScalar(0);
+  CvScalar maxVal = cvRealScalar(imgSrc->width * 255);
+  CvScalar val    = cvRealScalar(0);
 
   // for each col sum, if sum < width*255 then we find the min
   // then continue to end to search the max, if sum< width*255 then is new max
@@ -103,7 +103,7 @@ CvRect pix_opencv_knear :: findBB(IplImage* imgSrc)
   this->findX(imgSrc, &xmin, &xmax);
   this->findY(imgSrc, &ymin, &ymax);
 
-  aux=cvRect(xmin, ymin, xmax-xmin, ymax-ymin);
+  aux = cvRect(xmin, ymin, xmax-xmin, ymax-ymin);
 
   return aux;
 }
@@ -113,33 +113,37 @@ IplImage pix_opencv_knear :: preprocessing(IplImage* imgSrc,int new_width, int n
   IplImage* result;
   IplImage* scaledResult;
 
-  CvMat data;
-  CvMat dataA;
+  CvMat  data;
+  CvMat  dataA;
   CvRect bb;//bounding box
 
   // find bounding box
-  bb=this->findBB(imgSrc);
+  bb = this->findBB(imgSrc);
 
   if ( ( bb.width == 0 ) || ( bb.height == 0 ) )
   {
      bb.x = 0;
      bb.y = 0;
-     bb.width = imgSrc->width;
+     bb.width  = imgSrc->width;
      bb.height = imgSrc->height;
   }
 
-  // get bounding box data and no with aspect ratio, the x and y can be corrupted
+  // get bounding box data and no 
+  // with aspect ratio, the x and y can be corrupted
   cvGetSubRect(imgSrc, &data, cvRect(bb.x, bb.y, bb.width, bb.height));
+  
   // create image with this data with width and height with aspect ratio 1
   // then we get highest size betwen width and height of our bounding box
   int size=(bb.width>bb.height)?bb.width:bb.height;
   result=cvCreateImage( cvSize( size, size ), 8, 1 );
   cvSet(result,CV_RGB(255,255,255),NULL);
+  
   // copy de data in center of image
   int x=(int)floor((float)(size-bb.width)/2.0f);
   int y=(int)floor((float)(size-bb.height)/2.0f);
   cvGetSubRect(result, &dataA, cvRect(x,y,bb.width, bb.height));
   cvCopy(&data, &dataA, NULL);
+  
   // scale result
   scaledResult=cvCreateImage( cvSize( new_width, new_height ), 8, 1 );
   cvResize(result, scaledResult, CV_INTER_NN);
@@ -162,42 +166,50 @@ void pix_opencv_knear :: load_patterns(void)
 
   for( j = 0; j< this->x_nsamples; j++)
   {
-
-     // load fileath
-     
-    if ( x_filepath[0] == '/' ){ // absolute path
+    // load fileath
+ 
+    if ( x_filepath[0] == '/' )
+    { 
+      // absolute path
       sprintf(file,"%s/%03d.png",this->x_filepath, j);
+  
     } else { // relative path 
+  
       std::string absolutePath = localPath + x_filepath;
       sprintf(file,"%s/%03d.png",absolutePath.c_str(), j);
+  
     }
-     src_image = cvLoadImage(file,0);
-     if(!src_image)
-     {
-       post("pix_opencv_knear : error: couldn't load image %s\n", file);
-       continue;
-     }
-     if ( ( this->x_pwidth == -1 ) || ( this->x_pheight == -1 ) )
-     {
-        this->x_pwidth = src_image->width;
-        this->x_pheight = src_image->height;
-        // post( "pix_opencv_knear : loaded : %s (%dx%d)", file, src_image->width, src_image->height);
-        this->x_rsamples++;
-     }
-     else if ( ( src_image->width != this->x_pwidth ) || ( src_image->height != this->x_pheight ) )
-     {
-        post( "pix_opencv_knear : error : %s (%dx%d) : wrong size ( should be %dx%d )", file, src_image->width, src_image->height, this->x_pwidth, this->x_pheight);
+    src_image = cvLoadImage(file,0);
+ 
+    if(!src_image)
+    {
+      ::post("pix_opencv_knear : error: couldn't load image %s\n", file);
+      continue;
+    }
+ 
+    if ( ( this->x_pwidth == -1 ) || ( this->x_pheight == -1 ) )
+    {
+       this->x_pwidth = src_image->width;
+       this->x_pheight = src_image->height;
+       /* ::post( "pix_opencv_knear : loaded : %s (%dx%d)", 
+       file, src_image->width, src_image->height); */
+       this->x_rsamples++;
+    } else if (( src_image->width  != this->x_pwidth  ) || 
+               ( src_image->height != this->x_pheight ))
+    {
+      ::post( "pix_opencv_knear : error : %s (%dx%d) : wrong size ( should be %dx%d )",
+        file, src_image->width, src_image->height, this->x_pwidth, this->x_pheight);
         continue;
-     }
-     else
-     {
-        // post( "pix_opencv_knear : loaded : %s (%dx%d)", file, src_image->width, src_image->height);
+     } else {
+        /* ::post( "pix_opencv_knear : loaded : %s (%dx%d)",
+         file, src_image->width, src_image->height); */
         this->x_rsamples++;
      }
 
      // process file
      prs_image = this->preprocessing(src_image, this->x_pwidth, this->x_pheight);
-     // post( "pix_opencv_knear : preprocessed : %s (%dx%d)", file, this->x_pwidth, this->x_pheight);
+     /* ::post( "pix_opencv_knear : preprocessed : %s (%dx%d)",
+      * file, this->x_pwidth, this->x_pheight); */
 
      if ( ( this->trainData == NULL ) || ( this->trainClasses == NULL ))
      {
@@ -207,11 +219,14 @@ void pix_opencv_knear :: load_patterns(void)
 
      // set class label
      cvGetRow(this->trainClasses, &row, j);
+     
      cvSet(&row, cvRealScalar(i), NULL);
+     
      // set data
      cvGetRow(this->trainData, &row, j);
 
      IplImage* img = cvCreateImage( cvSize( this->x_pwidth, this->x_pheight ), IPL_DEPTH_32F, 1 );
+     
      // convert 8 bits image to 32 float image
      cvConvertScale(&prs_image, img, 0.0039215, 0);
 
@@ -219,15 +234,30 @@ void pix_opencv_knear :: load_patterns(void)
 
      // convert data matrix sizexsize to vecor
      row1 = cvReshape( &data, &row_header, 0, 1 );
+     
      cvCopy(row1, &row, NULL);
+     
      cvReleaseImage( &img );
   }
 
   // create the classifier
-  post( "pix_opencv_knear : loaded : %d samples from %s", this->x_rsamples, this->x_filepath);
+
+  ::post( "pix_opencv_knear : loaded : %d samples from %s", 
+      this->x_rsamples, this->x_filepath);
+
   if ( this->x_rsamples == this->x_nsamples )
   {
-    this->knn=new CvKNearest( this->trainData, this->trainClasses, 0, false, this->x_nsamples );
+
+    // FIXME!!!!!!
+    
+    // this->knn=new cv::ml::KNearest( this->trainData, this->trainClasses, 0, false, this->x_nsamples );
+
+
+    this->knn=cv::ml::KNearest::create();
+    // knn->cv::ml::StatModel::train  (this->trainData);
+    // knn->cv::ml::StatModel::predict (this->trainClasses);
+
+
     this->x_nearest=cvCreateMat(1,this->x_nsamples,CV_32FC1);
     this->x_dist=cvCreateMat(1,this->x_nsamples,CV_32FC1);
   }
@@ -242,11 +272,11 @@ pix_opencv_knear :: pix_opencv_knear(t_symbol *path, t_floatarg nsamples)
 { 
   m_dataout = outlet_new(this->x_obj, &s_anything);
 
-  comp_xsize  = 320;
+  comp_xsize = 320;
   comp_ysize = 240;
 
   rgba = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 4 );
-  rgb = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 3 );
+  rgb =  cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 3 );
   grey = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 1 );
 
   if ( path && path != gensym("") && nsamples > 0. ){
@@ -322,7 +352,7 @@ void pix_opencv_knear :: processRGBAImage(imageStruct &image)
      IplImage prs_image;
      CvMat row_header, *row1, odata;
 
-       // post( "pix_opencv_knear : size : (%dx%d)", this->x_pwidth, this->x_pheight);
+       // ::post( "pix_opencv_knear : size : (%dx%d)", this->x_pwidth, this->x_pheight);
 
        // process file
        prs_image = this->preprocessing(this->grey, this->x_pwidth, this->x_pheight);
@@ -331,12 +361,14 @@ void pix_opencv_knear :: processRGBAImage(imageStruct &image)
        IplImage* img32 = cvCreateImage( cvSize( this->x_pwidth, this->x_pheight ), IPL_DEPTH_32F, 1 );
        cvConvertScale(&prs_image, img32, 0.0039215, 0);
        cvGetSubRect(img32, &odata, cvRect(0,0, this->x_pwidth, this->x_pheight));
+
        row1 = cvReshape( &odata, &row_header, 0, 1 );
 
-       this->knn->find_nearest(row1,this->x_nsamples,0,0,this->x_nearest,this->x_dist);
+       this->knn->findNearest(row1,this->x_nsamples,this->x_nearest,this->x_dist);
+       // this->knn->cv::ml::findNearest(row1,this->x_nsamples,0,0,this->x_nearest,this->x_dist);
        for ( i=0; i<this->x_nsamples; i++ )
        {
-         // post( "pix_opencv_knear : distance : %f", this->x_dist->data.fl[i] );
+         // ::post( "pix_opencv_knear : distance : %f", this->x_dist->data.fl[i] );
        }
        outlet_float(this->m_dataout, this->x_dist->data.fl[0]);
 
@@ -377,7 +409,7 @@ void pix_opencv_knear :: processRGBImage(imageStruct &image)
      IplImage prs_image;
      CvMat row_header, *row1, odata;
 
-       // post( "pix_opencv_knear : size : (%dx%d)", this->x_pwidth, this->x_pheight);
+       // ::post( "pix_opencv_knear : size : (%dx%d)", this->x_pwidth, this->x_pheight);
 
        // process file
        prs_image = this->preprocessing(this->grey, this->x_pwidth, this->x_pheight);
@@ -388,10 +420,11 @@ void pix_opencv_knear :: processRGBImage(imageStruct &image)
        cvGetSubRect(img32, &odata, cvRect(0,0, this->x_pwidth, this->x_pheight));
        row1 = cvReshape( &odata, &row_header, 0, 1 );
 
-       this->knn->find_nearest(row1,this->x_nsamples,0,0,this->x_nearest,this->x_dist);
+       this->knn->findNearest(row1,this->x_nsamples,this->x_nearest,this->x_dist);
+       // this->knn->cv::ml::findNearest(row1,this->x_nsamples,0,0,this->x_nearest,this->x_dist);
        for ( i=0; i<this->x_nsamples; i++ )
        {
-         // post( "pix_opencv_knear : distance : %f", this->x_dist->data.fl[i] );
+         // ::post( "pix_opencv_knear : distance : %f", this->x_dist->data.fl[i] );
        }
        outlet_float(this->m_dataout, this->x_dist->data.fl[0]);
 
@@ -404,9 +437,9 @@ void pix_opencv_knear :: processRGBImage(imageStruct &image)
 
 void pix_opencv_knear :: processYUVImage(imageStruct &image)
 {
-  post( "pix_opencv_knear : yuv format not supported" );
+  ::post( "pix_opencv_knear : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_knear :: processGrayImage(imageStruct &image)
 { 
  int i;
@@ -436,7 +469,7 @@ void pix_opencv_knear :: processGrayImage(imageStruct &image)
      IplImage prs_image;
      CvMat row_header, *row1, odata;
 
-       // post( "pix_opencv_knear : size : (%dx%d)", this->x_pwidth, this->x_pheight);
+       // ::post( "pix_opencv_knear : size : (%dx%d)", this->x_pwidth, this->x_pheight);
 
        // process file
        prs_image = this->preprocessing(this->grey, this->x_pwidth, this->x_pheight);
@@ -447,10 +480,11 @@ void pix_opencv_knear :: processGrayImage(imageStruct &image)
        cvGetSubRect(img32, &odata, cvRect(0,0, this->x_pwidth, this->x_pheight));
        row1 = cvReshape( &odata, &row_header, 0, 1 );
 
-       this->knn->find_nearest(row1,this->x_nsamples,0,0,this->x_nearest,this->x_dist);
+       this->knn->findNearest(row1,this->x_nsamples,this->x_nearest,this->x_dist);
+       // this->knn->cv::ml::findNearest(row1,this->x_nsamples,0,0,this->x_nearest,this->x_dist);
        for ( i=0; i<this->x_nsamples; i++ )
        {
-         // post( "pix_opencv_knear : distance : %f", this->x_dist->data.fl[i] );
+         // ::post( "pix_opencv_knear : distance : %f", this->x_dist->data.fl[i] );
        }
        outlet_float(this->m_dataout, this->x_dist->data.fl[0]);
 
@@ -468,9 +502,9 @@ void pix_opencv_knear :: processGrayImage(imageStruct &image)
 void pix_opencv_knear :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_knear::bangMessCallback,
-  		  gensym("bang"), A_NULL);
+            gensym("bang"), A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_knear::loadMessCallback,
-		  gensym("load"), A_SYMBOL, A_DEFFLOAT, A_NULL);
+          gensym("load"), A_SYMBOL, A_DEFFLOAT, A_NULL);
 }
 
 void pix_opencv_knear :: bangMessCallback(void *data)

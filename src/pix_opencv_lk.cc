@@ -66,16 +66,18 @@ pix_opencv_lk :: pix_opencv_lk()
   // initialize font
   cvInitFont( &font, CV_FONT_HERSHEY_PLAIN, 1.0, 1.0, 0, 1, 8 );
 
-  rgba = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 4 );
-  orgb = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 3 );
-  rgb = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 3 );
-  gray = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 1 );
-  ogray = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 1 );
-  prev_gray = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 1 );
-  pyramid = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 1 );
+  rgba         = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 4 );
+  orgb         = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 3 );
+  rgb          = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 3 );
+  gray         = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 1 );
+  ogray        = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 1 );
+  prev_gray    = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 1 );
+  pyramid      = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 1 );
   prev_pyramid = cvCreateImage( cvSize(comp_xsize, comp_ysize), 8, 1 );
+  
   points[0] = (CvPoint2D32f*)cvAlloc(MAX_COUNT*sizeof(points[0][0]));
   points[1] = (CvPoint2D32f*)cvAlloc(MAX_COUNT*sizeof(points[0][0]));
+  
   status = (char*)cvAlloc(MAX_COUNT);
 
 }
@@ -149,7 +151,7 @@ void pix_opencv_lk :: processRGBAImage(imageStruct &image)
   {
        x_found[im]--;
   }
-
+#if 0
   if ( delaunay >= 0 )
   {
     // init data structures for the delaunay
@@ -158,13 +160,16 @@ void pix_opencv_lk :: processRGBAImage(imageStruct &image)
     x_fullrect.width = 2*comp_xsize;
     x_fullrect.height = 2*comp_ysize;
 
-    x_storage = cvCreateMemStorage(0);
-    x_subdiv = cvCreateSubdiv2D( CV_SEQ_KIND_SUBDIV2D, sizeof(*x_subdiv),
-                               sizeof(CvSubdiv2DPoint),
-                               sizeof(CvQuadEdge2D),
-                               x_storage );
-     cvInitSubdivDelaunay2D( x_subdiv, x_fullrect );
+
+    // x_storage = cvCreateMemStorage(0);
+    // x_subdiv = cvCreateSubdiv2D( CV_SEQ_KIND_SUBDIV2D, sizeof(*x_subdiv),
+    //                            sizeof(cv::Subdiv2DPoint),
+    //                            sizeof(CvQuadEdge2D),
+    //                            x_storage );
+    //  cvInitSubdivDelaunay2D( x_subdiv, x_fullrect );
+
   }
+#endif
 
   if( need_to_init )
   {
@@ -207,6 +212,7 @@ void pix_opencv_lk :: processRGBAImage(imageStruct &image)
           continue;
 
          points[1][k++] = points[1][i];
+#if 0
          if ( delaunay == 0 ) // add all the points
          {
             cvSubdivDelaunay2DInsert( x_subdiv, points[1][i] );
@@ -247,7 +253,7 @@ void pix_opencv_lk :: processRGBAImage(imageStruct &image)
               }
             }
          }
-
+#endif
          cvCircle( rgb, cvPointFrom32f(points[1][i]), 3, CV_RGB(0,255,0), -1, 8,0);
 
          marked=0;
@@ -327,7 +333,7 @@ void pix_opencv_lk :: processRGBAImage(imageStruct &image)
            cvTermCriteria(CV_TERMCRIT_ITER|CV_TERMCRIT_EPS,20,0.03));
         add_remove_pt = 0;
   }
-
+#if 0
   // draw the delaunay
   if ( delaunay >= 0 )
   {
@@ -340,16 +346,16 @@ void pix_opencv_lk :: processRGBAImage(imageStruct &image)
      for( i = 0; i < total; i++ )
      {
        CvQuadEdge2D* edge = (CvQuadEdge2D*)(reader.ptr);
-       CvSubdiv2DPoint* org_pt;
-       CvSubdiv2DPoint* dst_pt;
+       cv::Subdiv2DPoint* org_pt;
+       cv::Subdiv2DPoint* dst_pt;
        CvPoint2D32f org;
        CvPoint2D32f dst;
        CvPoint iorg, idst;
 
          if( CV_IS_SET_ELEM( edge ))
          {
-           org_pt = cvSubdiv2DEdgeOrg((CvSubdiv2DEdge)edge);
-           dst_pt = cvSubdiv2DEdgeDst((CvSubdiv2DEdge)edge);
+           org_pt = cv::Subdiv2DEdgeOrg((cv::Subdiv2DEdge)edge);
+           dst_pt = cv::Subdiv2DEdgeDst((cv::Subdiv2DEdge)edge);
 
            if( org_pt && dst_pt )
            {
@@ -370,6 +376,7 @@ void pix_opencv_lk :: processRGBAImage(imageStruct &image)
          CV_NEXT_SEQ_ELEM( elem_size, reader );
      }
   }
+#endif
 
   CV_SWAP( prev_gray, gray, swap_temp );
   CV_SWAP( prev_pyramid, pyramid, swap_temp );
@@ -427,7 +434,7 @@ void pix_opencv_lk :: processRGBImage(imageStruct &image)
   {
        x_found[im]--;
   }
-
+#if 0
   if ( delaunay >= 0 )
   {
     // init data structures for the delaunay
@@ -438,12 +445,12 @@ void pix_opencv_lk :: processRGBImage(imageStruct &image)
 
     x_storage = cvCreateMemStorage(0);
     x_subdiv = cvCreateSubdiv2D( CV_SEQ_KIND_SUBDIV2D, sizeof(*x_subdiv),
-                               sizeof(CvSubdiv2DPoint),
+                               sizeof(cv::Subdiv2DPoint),
                                sizeof(CvQuadEdge2D),
                                x_storage );
      cvInitSubdivDelaunay2D( x_subdiv, x_fullrect );
   }
-
+#endif
   if( need_to_init )
   {
      /* automatic initialization */
@@ -485,6 +492,7 @@ void pix_opencv_lk :: processRGBImage(imageStruct &image)
           continue;
 
          points[1][k++] = points[1][i];
+#if 0
          if ( delaunay == 0 ) // add all the points
          {
             cvSubdivDelaunay2DInsert( x_subdiv, points[1][i] );
@@ -525,7 +533,7 @@ void pix_opencv_lk :: processRGBImage(imageStruct &image)
               }
             }
          }
-
+#endif
          cvCircle( rgb, cvPointFrom32f(points[1][i]), 3, CV_RGB(0,255,0), -1, 8,0);
 
          marked=0;
@@ -604,7 +612,7 @@ void pix_opencv_lk :: processRGBImage(imageStruct &image)
            cvTermCriteria(CV_TERMCRIT_ITER|CV_TERMCRIT_EPS,20,0.03));
         add_remove_pt = 0;
   }
-
+#if 0
   // draw the delaunay
   if ( delaunay >= 0 )
   {
@@ -617,16 +625,16 @@ void pix_opencv_lk :: processRGBImage(imageStruct &image)
      for( i = 0; i < total; i++ )
      {
        CvQuadEdge2D* edge = (CvQuadEdge2D*)(reader.ptr);
-       CvSubdiv2DPoint* org_pt;
-       CvSubdiv2DPoint* dst_pt;
+       cv::Subdiv2DPoint* org_pt;
+       cv::Subdiv2DPoint* dst_pt;
        CvPoint2D32f org;
        CvPoint2D32f dst;
        CvPoint iorg, idst;
 
          if( CV_IS_SET_ELEM( edge ))
          {
-           org_pt = cvSubdiv2DEdgeOrg((CvSubdiv2DEdge)edge);
-           dst_pt = cvSubdiv2DEdgeDst((CvSubdiv2DEdge)edge);
+           org_pt = cv::Subdiv2DEdgeOrg((cv::Subdiv2DEdge)edge);
+           dst_pt = cv::Subdiv2DEdgeDst((cv::Subdiv2DEdge)edge);
 
            if( org_pt && dst_pt )
            {
@@ -647,6 +655,7 @@ void pix_opencv_lk :: processRGBImage(imageStruct &image)
          CV_NEXT_SEQ_ELEM( elem_size, reader );
      }
   }
+#endif
 
   CV_SWAP( prev_gray, gray, swap_temp );
   CV_SWAP( prev_pyramid, pyramid, swap_temp );
@@ -660,7 +669,7 @@ void pix_opencv_lk :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_lk : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_lk :: processGrayImage(imageStruct &image)
 { 
   int i, k;
@@ -706,7 +715,7 @@ void pix_opencv_lk :: processGrayImage(imageStruct &image)
   {
        x_found[im]--;
   }
-
+#if 0
   if ( delaunay >= 0 )
   {
     // init data structures for the delaunay
@@ -717,16 +726,16 @@ void pix_opencv_lk :: processGrayImage(imageStruct &image)
 
     x_storage = cvCreateMemStorage(0);
     x_subdiv = cvCreateSubdiv2D( CV_SEQ_KIND_SUBDIV2D, sizeof(*x_subdiv),
-                               sizeof(CvSubdiv2DPoint),
+                               sizeof(cv::Subdiv2DPoint),
                                sizeof(CvQuadEdge2D),
                                x_storage );
      cvInitSubdivDelaunay2D( x_subdiv, x_fullrect );
   }
-
+#endif
   if( need_to_init )
   {
      /* automatic initialization */
-     IplImage* eig = cvCreateImage( cvSize(gray->width,gray->height), 32, 1 );
+     IplImage* eig  = cvCreateImage( cvSize(gray->width,gray->height), 32, 1 );
      IplImage* temp = cvCreateImage( cvSize(gray->width,gray->height), 32, 1 );
 
      count = MAX_COUNT;
@@ -764,6 +773,7 @@ void pix_opencv_lk :: processGrayImage(imageStruct &image)
           continue;
 
          points[1][k++] = points[1][i];
+#if 0
          if ( delaunay == 0 ) // add all the points
          {
             cvSubdivDelaunay2DInsert( x_subdiv, points[1][i] );
@@ -799,7 +809,7 @@ void pix_opencv_lk :: processGrayImage(imageStruct &image)
               }
             }
          }
-
+#endif
          cvCircle( gray, cvPointFrom32f(points[1][i]), 3, CV_RGB(0,255,0), -1, 8,0);
 
          marked=0;
@@ -878,7 +888,7 @@ void pix_opencv_lk :: processGrayImage(imageStruct &image)
            cvTermCriteria(CV_TERMCRIT_ITER|CV_TERMCRIT_EPS,20,0.03));
         add_remove_pt = 0;
   }
-
+#if 0
   // draw the delaunay
   if ( delaunay >= 0 )
   {
@@ -891,16 +901,16 @@ void pix_opencv_lk :: processGrayImage(imageStruct &image)
      for( i = 0; i < total; i++ )
      {
        CvQuadEdge2D* edge = (CvQuadEdge2D*)(reader.ptr);
-       CvSubdiv2DPoint* org_pt;
-       CvSubdiv2DPoint* dst_pt;
+       cv::Subdiv2DPoint* org_pt;
+       cv::Subdiv2DPoint* dst_pt;
        CvPoint2D32f org;
        CvPoint2D32f dst;
        CvPoint iorg, idst;
 
          if( CV_IS_SET_ELEM( edge ))
          {
-           org_pt = cvSubdiv2DEdgeOrg((CvSubdiv2DEdge)edge);
-           dst_pt = cvSubdiv2DEdgeDst((CvSubdiv2DEdge)edge);
+           org_pt = cv::Subdiv2DEdgeOrg((cv::Subdiv2DEdge)edge);
+           dst_pt = cv::Subdiv2DEdgeDst((cv::Subdiv2DEdge)edge);
 
            if( org_pt && dst_pt )
            {
@@ -921,7 +931,7 @@ void pix_opencv_lk :: processGrayImage(imageStruct &image)
          CV_NEXT_SEQ_ELEM( elem_size, reader );
      }
   }
-
+#endif
   CV_SWAP( prev_gray, gray, swap_temp );
   CV_SWAP( prev_pyramid, pyramid, swap_temp );
   CV_SWAP( points[0], points[1], swap_points );
@@ -938,29 +948,29 @@ void pix_opencv_lk :: processGrayImage(imageStruct &image)
 void pix_opencv_lk :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_lk::winSizeMessCallback,
-		  gensym("winsize"), A_FLOAT, A_NULL);
+          gensym("winsize"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_lk::nightModeMessCallback,
-		  gensym("nightmode"), A_FLOAT, A_NULL);
+          gensym("nightmode"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_lk::qualityMessCallback,
-		  gensym("quality"), A_FLOAT, A_NULL);
+          gensym("quality"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_lk::initMessCallback,
-		  gensym("init"), A_NULL);
+          gensym("init"), A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_lk::markMessCallback,
-		  gensym("mark"), A_GIMME, A_NULL);
+          gensym("mark"), A_GIMME, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_lk::deleteMessCallback,
-		  gensym("delete"), A_FLOAT, A_NULL);
+          gensym("delete"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_lk::clearMessCallback,
-		  gensym("clear"), A_NULL);
+          gensym("clear"), A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_lk::minDistanceMessCallback,
-		  gensym("mindistance"), A_FLOAT, A_NULL);
+          gensym("mindistance"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_lk::maxMoveMessCallback,
-		  gensym("maxmove"), A_FLOAT, A_NULL);
+          gensym("maxmove"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_lk::ftoleranceMessCallback,
-		  gensym("ftolerance"), A_FLOAT, A_NULL);
+          gensym("ftolerance"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_lk::delaunayMessCallback,
-		  gensym("delaunay"), A_SYMBOL, A_NULL);
+          gensym("delaunay"), A_SYMBOL, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_lk::pdelaunayMessCallback,
-		  gensym("pdelaunay"), A_FLOAT, A_FLOAT, A_NULL);
+          gensym("pdelaunay"), A_FLOAT, A_FLOAT, A_NULL);
 }
 
 void  pix_opencv_lk :: winSizeMessCallback(void *data, t_floatarg winsize)

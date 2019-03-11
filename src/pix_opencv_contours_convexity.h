@@ -43,47 +43,47 @@ class GEM_EXPORT pix_opencv_contours_convexity : public GemPixObj
 
     public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_contours_convexity();
-    	
+        //////////
+        // Constructor
+        pix_opencv_contours_convexity();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_contours_convexity();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_contours_convexity();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
-    	
-	//////////
-    	// Set the new edge threshold
-    	void	    	floatMinAreaMess(float minarea);
-    	void	    	floatMaxAreaMess(float maxarea);
-    	// The new minimal/maximal area 
-	int 		minarea;
-	int 		maxarea;
-	// to detect changes in the image size
-	int 		comp_xsize;
-	int		comp_ysize;
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
+        
+    //////////
+        // Set the new edge threshold
+        void            floatMinAreaMess(float minarea);
+        void            floatMaxAreaMess(float maxarea);
+        // The new minimal/maximal area 
+    int         minarea;
+    int         maxarea;
+    // to detect changes in the image size
+    int         comp_xsize;
+    int        comp_ysize;
 
     private:
     
-	t_outlet 	*m_nomdef;
-	t_outlet 	*m_dataout;
-    	//////////
-    	// Static member functions
-    	static void 	floatMinAreaMessCallback(void *data, t_floatarg minarea);
-    	static void 	floatMaxAreaMessCallback(void *data, t_floatarg maxarea);
+    t_outlet     *m_nomdef;
+    t_outlet     *m_dataout;
+        //////////
+        // Static member functions
+        static void     floatMinAreaMessCallback(void *data, t_floatarg minarea);
+        static void     floatMaxAreaMessCallback(void *data, t_floatarg maxarea);
 
-	/////////
-	// IplImage needed
-    	IplImage 	*rgb, *orig, *gray;
-	
+    /////////
+    // IplImage needed
+        IplImage     *rgb, *orig, *gray;
+    
 };
 
-#endif	// for header file
+#endif    // for header file

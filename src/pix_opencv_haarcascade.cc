@@ -72,10 +72,10 @@ pix_opencv_haarcascade :: pix_opencv_haarcascade()
 /////////////////////////////////////////////////////////
 pix_opencv_haarcascade :: ~pix_opencv_haarcascade()
 { 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&rgba);
-    	cvReleaseImage(&grey);
-    	cvReleaseImage(&frame);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&rgba);
+        cvReleaseImage(&grey);
+        cvReleaseImage(&frame);
 }
 
 /////////////////////////////////////////////////////////
@@ -88,18 +88,18 @@ void pix_opencv_haarcascade :: processRGBAImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!rgba)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&rgba);
-    	cvReleaseImage(&grey);
-    	cvReleaseImage(&frame);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&rgba);
+        cvReleaseImage(&grey);
+        cvReleaseImage(&frame);
 
-	//create the orig image with new size
+    //create the orig image with new size
         rgba = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
-    	frame = cvCreateImage(cvSize(rgba->width,rgba->height), IPL_DEPTH_8U, 3);
-    	grey = cvCreateImage( cvSize(rgba->width,rgba->height), 8, 1 );
+        frame = cvCreateImage(cvSize(rgba->width,rgba->height), IPL_DEPTH_8U, 3);
+        grey = cvCreateImage( cvSize(rgba->width,rgba->height), 8, 1 );
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
     memcpy( rgba->imageData, image.data, image.xsize*image.ysize*4 );
@@ -178,7 +178,7 @@ void pix_opencv_haarcascade :: processRGBAImage(imageStruct &image)
             SETFLOAT(&this->rlist[1], center.x);
             SETFLOAT(&this->rlist[2], center.y);
             SETFLOAT(&this->rlist[3], radius);
-    	    outlet_list( m_dataout, 0, 4, this->rlist );
+            outlet_list( m_dataout, 0, 4, this->rlist );
         }
         // delete lost objects
         for ( im=0; im<MAX_MARKERS; im++ )
@@ -203,18 +203,18 @@ void pix_opencv_haarcascade :: processRGBImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!frame)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&rgba);
-    	cvReleaseImage(&grey);
-    	cvReleaseImage(&frame);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&rgba);
+        cvReleaseImage(&grey);
+        cvReleaseImage(&frame);
 
-	//create the orig image with new size
+    //create the orig image with new size
         rgba = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
-    	frame = cvCreateImage(cvSize(rgba->width,rgba->height), IPL_DEPTH_8U, 3);
-    	grey = cvCreateImage( cvSize(rgba->width,rgba->height), 8, 1 );
+        frame = cvCreateImage(cvSize(rgba->width,rgba->height), IPL_DEPTH_8U, 3);
+        grey = cvCreateImage( cvSize(rgba->width,rgba->height), 8, 1 );
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
     memcpy( frame->imageData, image.data, image.xsize*image.ysize*3 );
@@ -293,7 +293,7 @@ void pix_opencv_haarcascade :: processRGBImage(imageStruct &image)
             SETFLOAT(&this->rlist[1], center.x);
             SETFLOAT(&this->rlist[2], center.y);
             SETFLOAT(&this->rlist[3], radius);
-    	    outlet_list( m_dataout, 0, 4, this->rlist );
+            outlet_list( m_dataout, 0, 4, this->rlist );
         }
         // delete lost objects
         for ( im=0; im<MAX_MARKERS; im++ )
@@ -315,25 +315,25 @@ void pix_opencv_haarcascade :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_haarcascade : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_haarcascade :: processGrayImage(imageStruct &image)
 { 
     double scale = 1;
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!grey)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&rgba);
-    	cvReleaseImage(&grey);
-    	cvReleaseImage(&frame);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&rgba);
+        cvReleaseImage(&grey);
+        cvReleaseImage(&frame);
 
-	//create the orig image with new size
+    //create the orig image with new size
         rgba = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
-    	frame = cvCreateImage(cvSize(rgba->width,rgba->height), IPL_DEPTH_8U, 3);
-    	grey = cvCreateImage( cvSize(rgba->width,rgba->height), 8, 1 );
+        frame = cvCreateImage(cvSize(rgba->width,rgba->height), IPL_DEPTH_8U, 3);
+        grey = cvCreateImage( cvSize(rgba->width,rgba->height), 8, 1 );
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
     memcpy( grey->imageData, image.data, image.xsize*image.ysize );
@@ -367,12 +367,12 @@ void pix_opencv_haarcascade :: processGrayImage(imageStruct &image)
             radius = cvRound((r->width + r->height)*0.25*scale);
             cvCircle( grey, center, radius, colors[i%8], 3, 8, 0 );
 
-    	    t_atom rlist[4];
+            t_atom rlist[4];
             SETFLOAT(&rlist[0], i);
             SETFLOAT(&rlist[1], center.x);
             SETFLOAT(&rlist[2], center.y);
             SETFLOAT(&rlist[3], radius);
-    	    outlet_list( m_dataout, 0, 4, rlist );
+            outlet_list( m_dataout, 0, 4, rlist );
         }
     }
 
@@ -450,19 +450,19 @@ void pix_opencv_haarcascade :: clearMess (void)
 void pix_opencv_haarcascade :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_haarcascade::scaleFactorMessCallback,
-  		  gensym("scale_factor"), A_FLOAT, A_NULL);
+            gensym("scale_factor"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_haarcascade::minNeighborsMessCallback,
-  		  gensym("min_neighbors"), A_FLOAT, A_NULL);
+            gensym("min_neighbors"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_haarcascade::modeMessCallback,
-  		  gensym("mode"), A_FLOAT, A_NULL);
+            gensym("mode"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_haarcascade::minSizeMessCallback,
-  		  gensym("min_size"), A_FLOAT, A_NULL);
+            gensym("min_size"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_haarcascade::loadCascadeMessCallback,
-  		  gensym("load"), A_SYMBOL, A_NULL);
+            gensym("load"), A_SYMBOL, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_haarcascade::fToleranceMessCallback,
-  		  gensym("ftolerance"), A_FLOAT, A_NULL);
+            gensym("ftolerance"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_haarcascade::clearMessCallback,
-  		  gensym("clear"), A_NULL);
+            gensym("clear"), A_NULL);
 }
 void pix_opencv_haarcascade :: scaleFactorMessCallback(void *data, t_floatarg scale_factor)
 {
@@ -490,7 +490,7 @@ void pix_opencv_haarcascade :: clearMessCallback(void *data)
 }
 void pix_opencv_haarcascade :: loadCascadeMessCallback(void *data, t_symbol* filename)
 {
-	    GetMyClass(data)->loadCascadeMess(filename);
+        GetMyClass(data)->loadCascadeMess(filename);
 }
 void pix_opencv_haarcascade :: loadCascadeMess(t_symbol *filename)
 {

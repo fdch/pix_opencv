@@ -48,13 +48,13 @@ pix_opencv_edge :: pix_opencv_edge()
 /////////////////////////////////////////////////////////
 pix_opencv_edge :: ~pix_opencv_edge()
 { 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&edge);
-    	cvReleaseImage(&cedge);
-    	cvReleaseImage(&cedgergb);
-    	cvReleaseImage(&rgb);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&edge);
+        cvReleaseImage(&cedge);
+        cvReleaseImage(&cedgergb);
+        cvReleaseImage(&rgb);
 }
 
 /////////////////////////////////////////////////////////
@@ -67,25 +67,25 @@ void pix_opencv_edge :: processRGBAImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!orig)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&edge);
-    	cvReleaseImage(&cedge);
-    	cvReleaseImage(&cedgergb);
-    	cvReleaseImage(&rgb);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&edge);
+        cvReleaseImage(&cedge);
+        cvReleaseImage(&cedgergb);
+        cvReleaseImage(&rgb);
 
-	//create the orig image with new size
+    //create the orig image with new size
         orig = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
 
-    	// Create the output images with new sizes
-    	cedge = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 4);
+        // Create the output images with new sizes
+        cedge = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 4);
 
-    	gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
-    	edge = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        edge = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
     
     }
     // Here we make a copy of the pixel data from image to orig->imageData
@@ -116,25 +116,25 @@ void pix_opencv_edge :: processRGBImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!rgb)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&edge);
-    	cvReleaseImage(&cedge);
-    	cvReleaseImage(&cedgergb);
-    	cvReleaseImage(&rgb);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&edge);
+        cvReleaseImage(&cedge);
+        cvReleaseImage(&cedgergb);
+        cvReleaseImage(&rgb);
 
-	//create the orig image with new size
+    //create the orig image with new size
         rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
 
-    	// Create the output images with new sizes
-    	cedgergb = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 3);
+        // Create the output images with new sizes
+        cedgergb = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 3);
 
-    	gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
-    	edge = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
+        gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
+        edge = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
     
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
@@ -161,32 +161,32 @@ void pix_opencv_edge :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_edge : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_edge :: processGrayImage(imageStruct &image)
 { 
   unsigned char *pixels = image.data;
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!rgb)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&edge);
-    	cvReleaseImage(&cedge);
-    	cvReleaseImage(&cedgergb);
-    	cvReleaseImage(&rgb);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&edge);
+        cvReleaseImage(&cedge);
+        cvReleaseImage(&cedgergb);
+        cvReleaseImage(&rgb);
 
-	//create the orig image with new size
+    //create the orig image with new size
         rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
 
-    	// Create the output images with new sizes
-    	cedgergb = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 3);
+        // Create the output images with new sizes
+        cedgergb = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 3);
 
-    	gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
-    	edge = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
+        gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
+        edge = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
     
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
@@ -226,7 +226,7 @@ void pix_opencv_edge :: floatThreshMess (float edge_thresh)
 void pix_opencv_edge :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_edge::floatTreshMessCallback,
-  		  gensym("ft1"), A_FLOAT, A_NULL);
+            gensym("ft1"), A_FLOAT, A_NULL);
 }
 void pix_opencv_edge :: floatTreshMessCallback(void *data, t_floatarg edge_thresh)
 {

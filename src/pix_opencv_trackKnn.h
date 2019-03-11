@@ -58,7 +58,7 @@ protected:
 
   //////////
   // Do the processing
-  virtual void 	processImage(imageStruct &image);
+  virtual void     processImage(imageStruct &image);
 
   // Messages handling
   void drawBlobMess(double arg);
@@ -77,7 +77,7 @@ private:
   t_outlet *m_dataout_right; // cvblob outlet
   
   unsigned int m_repeat_point;
-  double m_area_threshold;	// min area for contour
+  double m_area_threshold;    // min area for contour
   double m_epsilon;
   int m_drawBlob;
   
@@ -91,4 +91,4 @@ private:
   t_symbol *m_x_arrayname, *m_y_arrayname, *m_z_arrayname, *m_id_arrayname;
     
 };
-#endif	// for header file
+#endif    // for header file

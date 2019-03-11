@@ -25,8 +25,8 @@ LOG
 CLASS
     pix_opencv_contours
     
-	detects contours and send them out
-	
+    detects contours and send them out
+    
 KEYWORDS
     pix
     
@@ -51,18 +51,18 @@ protected:
 
   //////////
   // Do the processing
-  virtual void 	processImage(imageStruct &image);
+  virtual void     processImage(imageStruct &image);
 
   // Messages handling
-	void epsilonMess(double arg);
-	void areaMess(double arg);
-	void contoursMess(double arg);
+    void epsilonMess(double arg);
+    void areaMess(double arg);
+    void contoursMess(double arg);
   void cvblobMess(double arg);
-	void convexhullsMess(double arg);
-	void convexitydefectsMess(double arg);
-	void hierarchyMess(int arg);
-	void taboutputMess(float arg);
-	void tableMess(t_symbol*x, t_symbol*y, t_symbol*z);
+    void convexhullsMess(double arg);
+    void convexitydefectsMess(double arg);
+    void hierarchyMess(int arg);
+    void taboutputMess(float arg);
+    void tableMess(t_symbol*x, t_symbol*y, t_symbol*z);
   void repeat_pointMess(float arg);
 
 private:
@@ -83,6 +83,6 @@ private:
   int m_totalPointsCount, m_autoresize;
   
   t_symbol *m_x_arrayname, *m_y_arrayname, *m_z_arrayname;
-	    
+        
 };
-#endif	// for header file
+#endif    // for header file

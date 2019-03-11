@@ -60,18 +60,18 @@ pix_opencv_distrans :: pix_opencv_distrans()
 /////////////////////////////////////////////////////////
 pix_opencv_distrans :: ~pix_opencv_distrans()
 {
-    	//Destroy cv_images to clean memory
-    	cvReleaseImage( &rgb );
-    	cvReleaseImage( &gray );
-    	cvReleaseImage( &edge );
-    	cvReleaseImage( &dist );
-    	cvReleaseImage( &dist8u );
-    	cvReleaseImage( &dist8u1 );
-    	cvReleaseImage( &dist8u2 );
-    	cvReleaseImage( &dist32s );
-    	cvReleaseImage( &labels );
-    	cvReleaseImage( &rgba );
-    	cvReleaseImage( &alpha );
+        //Destroy cv_images to clean memory
+        cvReleaseImage( &rgb );
+        cvReleaseImage( &gray );
+        cvReleaseImage( &edge );
+        cvReleaseImage( &dist );
+        cvReleaseImage( &dist8u );
+        cvReleaseImage( &dist8u1 );
+        cvReleaseImage( &dist8u2 );
+        cvReleaseImage( &dist32s );
+        cvReleaseImage( &labels );
+        cvReleaseImage( &rgba );
+        cvReleaseImage( &alpha );
 }
 
 /////////////////////////////////////////////////////////
@@ -98,34 +98,34 @@ void pix_opencv_distrans :: processRGBAImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)&&(this->comp_ysize!=image.ysize)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-    	cvReleaseImage( &rgb );
-    	cvReleaseImage( &gray );
-    	cvReleaseImage( &edge );
-    	cvReleaseImage( &dist );
-    	cvReleaseImage( &dist8u );
-    	cvReleaseImage( &dist8u1 );
-    	cvReleaseImage( &dist8u2 );
-    	cvReleaseImage( &dist32s );
-    	cvReleaseImage( &labels );
-    	cvReleaseImage( &rgba );
-    	cvReleaseImage( &alpha );
+        //Destroy cv_images to clean memory
+        cvReleaseImage( &rgb );
+        cvReleaseImage( &gray );
+        cvReleaseImage( &edge );
+        cvReleaseImage( &dist );
+        cvReleaseImage( &dist8u );
+        cvReleaseImage( &dist8u1 );
+        cvReleaseImage( &dist8u2 );
+        cvReleaseImage( &dist32s );
+        cvReleaseImage( &labels );
+        cvReleaseImage( &rgba );
+        cvReleaseImage( &alpha );
 
-	//Create cv_images 
-    	rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
-    	gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
-    	dist = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32F, 1 );
-    	dist8u1 = cvCloneImage( gray );
-    	dist8u2 = cvCloneImage( gray );
-    	dist8u = cvCreateImage( cvGetSize(gray), IPL_DEPTH_8U, 3 );
-    	dist32s = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32S, 1 );
-    	edge = cvCloneImage( gray );
-    	labels = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32S, 1 );
-    	rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
-    	alpha = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
+    //Create cv_images 
+        rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
+        gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
+        dist = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32F, 1 );
+        dist8u1 = cvCloneImage( gray );
+        dist8u2 = cvCloneImage( gray );
+        dist8u = cvCreateImage( cvGetSize(gray), IPL_DEPTH_8U, 3 );
+        dist32s = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32S, 1 );
+        edge = cvCloneImage( gray );
+        labels = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32S, 1 );
+        rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
+        alpha = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
     }
     memcpy( rgba->imageData, image.data, image.xsize*image.ysize*4 );
     
@@ -200,34 +200,34 @@ void pix_opencv_distrans :: processRGBImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)&&(this->comp_ysize!=image.ysize)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-    	cvReleaseImage( &rgb );
-    	cvReleaseImage( &gray );
-    	cvReleaseImage( &edge );
-    	cvReleaseImage( &dist );
-    	cvReleaseImage( &dist8u );
-    	cvReleaseImage( &dist8u1 );
-    	cvReleaseImage( &dist8u2 );
-    	cvReleaseImage( &dist32s );
-    	cvReleaseImage( &labels );
-    	cvReleaseImage( &rgba );
-    	cvReleaseImage( &alpha );
+        //Destroy cv_images to clean memory
+        cvReleaseImage( &rgb );
+        cvReleaseImage( &gray );
+        cvReleaseImage( &edge );
+        cvReleaseImage( &dist );
+        cvReleaseImage( &dist8u );
+        cvReleaseImage( &dist8u1 );
+        cvReleaseImage( &dist8u2 );
+        cvReleaseImage( &dist32s );
+        cvReleaseImage( &labels );
+        cvReleaseImage( &rgba );
+        cvReleaseImage( &alpha );
 
-	//Create cv_images 
-    	rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
-    	gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
-    	dist = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32F, 1 );
-    	dist8u1 = cvCloneImage( gray );
-    	dist8u2 = cvCloneImage( gray );
-    	dist8u = cvCreateImage( cvGetSize(gray), IPL_DEPTH_8U, 3 );
-    	dist32s = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32S, 1 );
-    	edge = cvCloneImage( gray );
-    	labels = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32S, 1 );
-    	rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
-    	alpha = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
+    //Create cv_images 
+        rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
+        gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
+        dist = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32F, 1 );
+        dist8u1 = cvCloneImage( gray );
+        dist8u2 = cvCloneImage( gray );
+        dist8u = cvCreateImage( cvGetSize(gray), IPL_DEPTH_8U, 3 );
+        dist32s = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32S, 1 );
+        edge = cvCloneImage( gray );
+        labels = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32S, 1 );
+        rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
+        alpha = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
     memcpy( rgb->imageData, image.data, image.xsize*image.ysize*3 );
@@ -285,7 +285,7 @@ void pix_opencv_distrans :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_distrans : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_distrans :: processGrayImage(imageStruct &image)
 { 
   unsigned char *pixels = image.data;
@@ -306,34 +306,34 @@ void pix_opencv_distrans :: processGrayImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)&&(this->comp_ysize!=image.ysize)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-    	cvReleaseImage( &rgb );
-    	cvReleaseImage( &gray );
-    	cvReleaseImage( &edge );
-    	cvReleaseImage( &dist );
-    	cvReleaseImage( &dist8u );
-    	cvReleaseImage( &dist8u1 );
-    	cvReleaseImage( &dist8u2 );
-    	cvReleaseImage( &dist32s );
-    	cvReleaseImage( &labels );
-    	cvReleaseImage( &rgba );
-    	cvReleaseImage( &alpha );
+        //Destroy cv_images to clean memory
+        cvReleaseImage( &rgb );
+        cvReleaseImage( &gray );
+        cvReleaseImage( &edge );
+        cvReleaseImage( &dist );
+        cvReleaseImage( &dist8u );
+        cvReleaseImage( &dist8u1 );
+        cvReleaseImage( &dist8u2 );
+        cvReleaseImage( &dist32s );
+        cvReleaseImage( &labels );
+        cvReleaseImage( &rgba );
+        cvReleaseImage( &alpha );
 
-	//Create cv_images 
-    	rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
-    	gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
-    	dist = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32F, 1 );
-    	dist8u1 = cvCloneImage( gray );
-    	dist8u2 = cvCloneImage( gray );
-    	dist8u = cvCreateImage( cvGetSize(gray), IPL_DEPTH_8U, 3 );
-    	dist32s = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32S, 1 );
-    	edge = cvCloneImage( gray );
-    	labels = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32S, 1 );
-    	rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
-    	alpha = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
+    //Create cv_images 
+        rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
+        gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
+        dist = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32F, 1 );
+        dist8u1 = cvCloneImage( gray );
+        dist8u2 = cvCloneImage( gray );
+        dist8u = cvCreateImage( cvGetSize(gray), IPL_DEPTH_8U, 3 );
+        dist32s = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32S, 1 );
+        edge = cvCloneImage( gray );
+        labels = cvCreateImage( cvGetSize(gray), IPL_DEPTH_32S, 1 );
+        rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
+        alpha = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
     memcpy( gray->imageData, image.data, image.xsize*image.ysize );
@@ -395,11 +395,11 @@ void pix_opencv_distrans :: processGrayImage(imageStruct &image)
 void pix_opencv_distrans :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_distrans::thresholdMessCallback,
-  		  gensym("ft1"), A_FLOAT, A_NULL);
+            gensym("ft1"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_distrans::voronoiMessCallback,
-		  gensym("voronoi"), A_DEFFLOAT, A_NULL);
+          gensym("voronoi"), A_DEFFLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_distrans::maskMessCallback,
-		  gensym("mask"), A_DEFFLOAT, A_NULL);
+          gensym("mask"), A_DEFFLOAT, A_NULL);
 }
 void pix_opencv_distrans :: thresholdMessCallback(void *data, t_floatarg pos)
 {

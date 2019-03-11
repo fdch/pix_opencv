@@ -44,33 +44,33 @@ class GEM_EXPORT pix_opencv_colorfilt : public GemPixObj
 
     public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_colorfilt();
-    	
+        //////////
+        // Constructor
+        pix_opencv_colorfilt();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_colorfilt();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_colorfilt();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
-    	
-	//////////
-    	// Set the new edge threshold
-    	void	    	floatToleranceMess(float tolerance);
-    	void	    	floatRMess(float r);
-    	void	    	floatGMess(float g);
-    	void	    	floatBMess(float b);
-    	void	    	pickMess(float xcur, float ycur);
-    	void	    	drawColor(void);
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
+        
+    //////////
+        // Set the new edge threshold
+        void            floatToleranceMess(float tolerance);
+        void            floatRMess(float r);
+        void            floatGMess(float g);
+        void            floatBMess(float b);
+        void            pickMess(float xcur, float ycur);
+        void            drawColor(void);
 
-    	// The color tolerance
+        // The color tolerance
         int x_tolerance;
         unsigned char x_colorR; // RGB components of binary mask
         unsigned char x_colorG;
@@ -82,23 +82,23 @@ class GEM_EXPORT pix_opencv_colorfilt : public GemPixObj
 
         t_canvas *x_canvas;
 
-	// to detect changes in the image size
-	int 		comp_xsize;
-	int		comp_ysize;
+    // to detect changes in the image size
+    int         comp_xsize;
+    int        comp_ysize;
 
     private:
     
-    	//////////
-    	// Static member functions
-    	static void    	floatToleranceMessCallback(void *data, float tolerance);
-    	static void    	floatRMessCallback(void *data, float r);
-    	static void    	floatGMessCallback(void *data, float g);
-    	static void    	floatBMessCallback(void *data, float b);
-    	static void   	pickMessCallback(void *data, float xcur, float ycur);
+        //////////
+        // Static member functions
+        static void        floatToleranceMessCallback(void *data, float tolerance);
+        static void        floatRMessCallback(void *data, float r);
+        static void        floatGMessCallback(void *data, float g);
+        static void        floatBMessCallback(void *data, float b);
+        static void       pickMessCallback(void *data, float xcur, float ycur);
 
-	/////////
-	// IplImage needed
-    	IplImage 	*rgba, *rgb, *brgb;
+    /////////
+    // IplImage needed
+        IplImage     *rgba, *rgb, *brgb;
 };
 
-#endif	// for header file
+#endif    // for header file

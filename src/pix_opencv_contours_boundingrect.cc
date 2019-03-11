@@ -61,11 +61,11 @@ pix_opencv_contours_boundingrect :: pix_opencv_contours_boundingrect()
 /////////////////////////////////////////////////////////
 pix_opencv_contours_boundingrect :: ~pix_opencv_contours_boundingrect()
 { 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&cnt_img);
-    	cvReleaseImage(&rgb);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&cnt_img);
+        cvReleaseImage(&rgb);
 }
 
 /////////////////////////////////////////////////////////
@@ -114,23 +114,23 @@ void pix_opencv_contours_boundingrect :: processRGBAImage(imageStruct &image)
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!orig)) 
   {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&cnt_img);
-    	cvReleaseImage(&rgb);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&cnt_img);
+        cvReleaseImage(&rgb);
 
-	//create the orig image with new size
+    //create the orig image with new size
         orig = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
 
-    	// Create the output images with new sizes
-    	rgb = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 3);
+        // Create the output images with new sizes
+        rgb = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 3);
 
-    	gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
-    	cnt_img = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        cnt_img = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
     
     }
     // Here we make a copy of the pixel data from image to orig->imageData
@@ -167,9 +167,9 @@ void pix_opencv_contours_boundingrect :: processRGBAImage(imageStruct &image)
         int count = contours->total; // This is number point in contour
         CvRect rect;
 
-	rect = cvBoundingRect( contours, 1);
+    rect = cvBoundingRect( contours, 1);
 
-	if ( ( (rect.width*rect.height) > minarea ) && ( (rect.width*rect.height) < maxarea ) ) 
+    if ( ( (rect.width*rect.height) > minarea ) && ( (rect.width*rect.height) < maxarea ) ) 
         {
 
             oi = -1;
@@ -210,7 +210,7 @@ void pix_opencv_contours_boundingrect :: processRGBAImage(imageStruct &image)
 
             if ( x_draw )
             {
-	      cvRectangle( orig, cvPoint(rect.x,rect.y), cvPoint(rect.x+rect.width,rect.y+rect.height), CV_RGB(255,0,0), 2, 8 , 0 );
+          cvRectangle( orig, cvPoint(rect.x,rect.y), cvPoint(rect.x+rect.width,rect.y+rect.height), CV_RGB(255,0,0), 2, 8 , 0 );
               sprintf( tindex, "%d", oi );
               cvPutText( orig, tindex, cvPoint(x_xmark[oi],x_ymark[oi]), &font, CV_RGB(255,0,255));
             }
@@ -226,10 +226,10 @@ void pix_opencv_contours_boundingrect :: processRGBAImage(imageStruct &image)
             SETFLOAT(&rlist[3], rect.width);
             SETFLOAT(&rlist[4], rect.height);
 
-    	    outlet_list( m_dataout, 0, 5, rlist );
-	    i++;
-	    ic++;
-	}
+            outlet_list( m_dataout, 0, 5, rlist );
+        i++;
+        ic++;
+    }
     }
 
     outlet_float( m_countout, ic );
@@ -247,7 +247,7 @@ void pix_opencv_contours_boundingrect :: processRGBAImage(imageStruct &image)
          SETFLOAT(&rlist[2], -1.0);
          SETFLOAT(&rlist[3], 0.0);
          SETFLOAT(&rlist[4], 0.0);
-    	 outlet_list( m_dataout, 0, 5, rlist );
+         outlet_list( m_dataout, 0, 5, rlist );
        }
     }
 
@@ -269,20 +269,20 @@ void pix_opencv_contours_boundingrect :: processRGBImage(imageStruct &image)
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!rgb)) 
   {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&cnt_img);
-    	cvReleaseImage(&rgb);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&cnt_img);
+        cvReleaseImage(&rgb);
 
-	//create the orig image with new size
+    //create the orig image with new size
         rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
 
-    	gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
-    	cnt_img = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
+        gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
+        cnt_img = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
     
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
@@ -317,8 +317,8 @@ void pix_opencv_contours_boundingrect :: processRGBImage(imageStruct &image)
         int count = contours->total; // This is number point in contour
         CvRect rect;
 
-	rect = cvBoundingRect( contours, 1);
-	if ( ( (rect.width*rect.height) > minarea ) && ( (rect.width*rect.height) < maxarea ) ) 
+    rect = cvBoundingRect( contours, 1);
+    if ( ( (rect.width*rect.height) > minarea ) && ( (rect.width*rect.height) < maxarea ) ) 
         {
 
             oi = -1;
@@ -359,7 +359,7 @@ void pix_opencv_contours_boundingrect :: processRGBImage(imageStruct &image)
 
             if ( x_draw )
             {
-	      cvRectangle( rgb, cvPoint(rect.x,rect.y), cvPoint(rect.x+rect.width,rect.y+rect.height), CV_RGB(255,0,0), 2, 8 , 0 );
+          cvRectangle( rgb, cvPoint(rect.x,rect.y), cvPoint(rect.x+rect.width,rect.y+rect.height), CV_RGB(255,0,0), 2, 8 , 0 );
               sprintf( tindex, "%d", oi );
               cvPutText( rgb, tindex, cvPoint(x_xmark[oi],x_ymark[oi]), &font, CV_RGB(255,0,255));
             }
@@ -375,10 +375,10 @@ void pix_opencv_contours_boundingrect :: processRGBImage(imageStruct &image)
             SETFLOAT(&rlist[3], rect.width);
             SETFLOAT(&rlist[4], rect.height);
 
-    	    outlet_list( m_dataout, 0, 5, rlist );
-	    i++;
-	    ic++;
-	}
+            outlet_list( m_dataout, 0, 5, rlist );
+        i++;
+        ic++;
+    }
     }
     outlet_float( m_countout, ic );
 
@@ -395,7 +395,7 @@ void pix_opencv_contours_boundingrect :: processRGBImage(imageStruct &image)
          SETFLOAT(&rlist[2], -1.0);
          SETFLOAT(&rlist[3], 0.0);
          SETFLOAT(&rlist[4], 0.0);
-    	 outlet_list( m_dataout, 0, 5, rlist );
+         outlet_list( m_dataout, 0, 5, rlist );
        }
     }
 
@@ -408,7 +408,7 @@ void pix_opencv_contours_boundingrect :: processYUVImage(imageStruct &image)
 {
    post( "pix_opencv_contours_boundingrect : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_contours_boundingrect :: processGrayImage(imageStruct &image)
 { 
   char tindex[4];
@@ -420,23 +420,23 @@ void pix_opencv_contours_boundingrect :: processGrayImage(imageStruct &image)
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!orig)) 
   {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&cnt_img);
-    	cvReleaseImage(&rgb);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&cnt_img);
+        cvReleaseImage(&rgb);
 
-	//create the orig image with new size
+    //create the orig image with new size
         orig = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
 
-    	// Create the output images with new sizes
-    	rgb = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 3);
+        // Create the output images with new sizes
+        rgb = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 3);
 
-    	gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
-    	cnt_img = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        cnt_img = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
     
     }
     // Here we make a copy of the pixel data from image to orig->imageData
@@ -471,8 +471,8 @@ void pix_opencv_contours_boundingrect :: processGrayImage(imageStruct &image)
         int count = contours->total; // This is number point in contour
         CvRect rect;
 
-	rect = cvBoundingRect( contours, 1);
-	if ( ( (rect.width*rect.height) > minarea ) && ( (rect.width*rect.height) < maxarea ) ) 
+    rect = cvBoundingRect( contours, 1);
+    if ( ( (rect.width*rect.height) > minarea ) && ( (rect.width*rect.height) < maxarea ) ) 
         {
 
             oi = -1;
@@ -513,7 +513,7 @@ void pix_opencv_contours_boundingrect :: processGrayImage(imageStruct &image)
 
             if ( x_draw )
             {
-	      cvRectangle( cnt_img, cvPoint(rect.x,rect.y), cvPoint(rect.x+rect.width,rect.y+rect.height), cvScalarAll(255), 2, 8 , 0 );
+          cvRectangle( cnt_img, cvPoint(rect.x,rect.y), cvPoint(rect.x+rect.width,rect.y+rect.height), cvScalarAll(255), 2, 8 , 0 );
               sprintf( tindex, "%d", oi );
               cvPutText( cnt_img, tindex, cvPoint(x_xmark[oi],x_ymark[oi]), &font, cvScalarAll(255));
             }
@@ -529,10 +529,10 @@ void pix_opencv_contours_boundingrect :: processGrayImage(imageStruct &image)
             SETFLOAT(&rlist[3], rect.width);
             SETFLOAT(&rlist[4], rect.height);
 
-    	    outlet_list( m_dataout, 0, 5, rlist );
-	    i++;
-	    ic++;
-	}
+            outlet_list( m_dataout, 0, 5, rlist );
+        i++;
+        ic++;
+    }
     }
 
     outlet_float( m_countout, ic );
@@ -550,7 +550,7 @@ void pix_opencv_contours_boundingrect :: processGrayImage(imageStruct &image)
          SETFLOAT(&rlist[2], -1.0);
          SETFLOAT(&rlist[3], 0.0);
          SETFLOAT(&rlist[4], 0.0);
-    	 outlet_list( m_dataout, 0, 5, rlist );
+         outlet_list( m_dataout, 0, 5, rlist );
        }
     }
 
@@ -700,25 +700,25 @@ void pix_opencv_contours_boundingrect :: floatDrawMess (float draw)
 void pix_opencv_contours_boundingrect :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_contours_boundingrect::floatMinAreaMessCallback,
-  		  gensym("minarea"), A_FLOAT, A_NULL);
+            gensym("minarea"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_contours_boundingrect::floatMaxAreaMessCallback,
-  		  gensym("maxarea"), A_FLOAT, A_NULL);
+            gensym("maxarea"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_contours_boundingrect::floatFToleranceMessCallback,
-  		  gensym("ftolerance"), A_FLOAT, A_NULL);
+            gensym("ftolerance"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_contours_boundingrect::floatMMoveMessCallback,
-  		  gensym("maxmove"), A_FLOAT, A_NULL);
+            gensym("maxmove"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_contours_boundingrect::floatCModeMessCallback,
-  		  gensym("mode"), A_FLOAT, A_NULL);
+            gensym("mode"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_contours_boundingrect::floatCMethodMessCallback,
-  		  gensym("method"), A_FLOAT, A_NULL);
+            gensym("method"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_contours_boundingrect::floatClearMessCallback,
-  		  gensym("clear"), A_NULL);
+            gensym("clear"), A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_contours_boundingrect::floatNightmodeMessCallback,
-  		  gensym("nightmode"), A_FLOAT, A_NULL);
+            gensym("nightmode"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_contours_boundingrect::floatShowMessCallback,
-  		  gensym("show"), A_FLOAT, A_NULL);
+            gensym("show"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_contours_boundingrect::floatDrawMessCallback,
-  		  gensym("draw"), A_FLOAT, A_NULL);
+            gensym("draw"), A_FLOAT, A_NULL);
 }
 
 void pix_opencv_contours_boundingrect :: floatMaxAreaMessCallback(void *data, t_floatarg maxarea)

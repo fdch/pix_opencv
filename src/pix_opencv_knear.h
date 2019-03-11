@@ -16,17 +16,17 @@ LOG
 #ifndef INCLUDE_PIX_OPENCV_KNEAR_H_
 #define INCLUDE_PIX_OPENCV_KNEAR_H_
 
-#ifndef _EiC
-// #include "opencv2/legacy/legacy.hpp"
-#include "opencv2/highgui/highgui_c.h"
-#include "opencv2/ml/ml.hpp"
-#endif
 
-#include "Base/GemPixObj.h"
+#include "ml.h"
+#include "opencv2/core/mat.hpp"
+#include "opencv2/imgproc.hpp"
+#include "opencv2/imgproc/imgproc_c.h"
+#include "opencv2/highgui/highgui.hpp"
 
 #include <string>
 #include <stdio.h>
 
+#include "Base/GemPixObj.h"
 /*-----------------------------------------------------------------
 -------------------------------------------------------------------
 CLASS
@@ -47,62 +47,62 @@ class GEM_EXPORT pix_opencv_knear : public GemPixObj
 
     public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_knear(t_symbol *path, t_floatarg nsamples);
-    	
+        //////////
+        // Constructor
+        pix_opencv_knear(t_symbol *path, t_floatarg nsamples);
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_knear();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_knear();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
-    	
-        void findX(IplImage* imgSrc,int* min, int* max);
-        void findY(IplImage* imgSrc,int* min, int* max);
-        CvRect findBB(IplImage* imgSrc);
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+        virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
+        
+        void     findX(IplImage* imgSrc,int* min, int* max);
+        void     findY(IplImage* imgSrc,int* min, int* max);
+        void     load_patterns(void);
+        CvRect   findBB(IplImage* imgSrc);
         IplImage preprocessing(IplImage* imgSrc,int new_width, int new_height);
-        void load_patterns(void);
 
-	// to detect changes in the image size
-	int 		comp_xsize;
-	int		comp_ysize;
+        // to detect changes in the image size
+        int comp_xsize;
+        int    comp_ysize;
     
 
     private:
     
-    	//////////
-    	// Static member functions
-    	static void 	bangMessCallback(void *data);
-    	static void 	loadMessCallback(void *data, t_symbol *path, t_floatarg nsamples);
+        //////////
+        // Static member functions
+        static void     bangMessCallback(void *data);
+        static void     loadMessCallback(void *data, t_symbol *path, t_floatarg nsamples);
 
         // internal data
-        t_outlet        *m_dataout;
-        int             x_classify;
+        t_outlet *m_dataout;
+        int      x_classify;
 
          // open cv classifier data
-        char            *x_filepath;
-        int             x_nsamples;
-        int             x_rsamples;
-        CvMat           *trainData;
-        CvMat           *trainClasses;
-        CvMat           *x_nearest;
-        CvMat           *x_dist;
-        int             x_pwidth;
-        int             x_pheight;
-        CvKNearest      *knn;
+        char                *x_filepath;
+        int                 x_nsamples;
+        int                 x_rsamples;
+        CvMat               *trainData;
+        CvMat               *trainClasses;
+        CvMat               *x_nearest;
+        CvMat               *x_dist;
+        int                 x_pwidth;
+        int                 x_pheight;
+        cv::ml::KNearest    *knn;
         
         std::string localPath;
 
-	// The output and temporary images
-    	IplImage 	*rgba, *rgb, *grey;
-	
+        // The output and temporary images
+        IplImage     *rgba, *rgb, *grey;
+    
 };
 
-#endif	// for header file
+#endif    // for header file

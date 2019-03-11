@@ -97,21 +97,21 @@ void pix_opencv_colorfilt :: processRGBAImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!rgba)) {
 
-	comp_xsize = image.xsize;
-	comp_ysize = image.ysize;
+    comp_xsize = image.xsize;
+    comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
+        //Destroy cv_images to clean memory
         if ( rgba )
         {
-	  cvReleaseImage(&rgba);
-    	  cvReleaseImage(&rgb);
-    	  cvReleaseImage(&brgb);
+      cvReleaseImage(&rgba);
+          cvReleaseImage(&rgb);
+          cvReleaseImage(&brgb);
         }
 
-	//create the orig image with new size
+    //create the orig image with new size
         rgba = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
         rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
-    	brgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
+        brgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
     }
     memcpy( rgba->imageData, image.data, image.xsize*image.ysize*4 );
     cvCopy(rgba, brgb);
@@ -156,21 +156,21 @@ void pix_opencv_colorfilt :: processRGBImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!rgb)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
+        //Destroy cv_images to clean memory
         if ( rgb )
         {
-	  cvReleaseImage(&rgba);
-    	  cvReleaseImage(&rgb);
-    	  cvReleaseImage(&brgb);
+      cvReleaseImage(&rgba);
+          cvReleaseImage(&rgb);
+          cvReleaseImage(&brgb);
         }
 
-	//create the orig image with new size
+    //create the orig image with new size
         rgba = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
         rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
-    	brgb = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 4);
+        brgb = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 4);
     
     }
     memcpy( rgb->imageData, image.data, image.xsize*image.ysize*3 );
@@ -203,7 +203,7 @@ void pix_opencv_colorfilt :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_colorfilt : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_colorfilt :: processGrayImage(imageStruct &image)
 { 
   post( "pix_opencv_colorfilt : gray format not supported" );
@@ -262,15 +262,15 @@ void pix_opencv_colorfilt :: pickMess (float xcur, float ycur)
 void pix_opencv_colorfilt :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_colorfilt::floatToleranceMessCallback,
-  		  gensym("tolerance"), A_FLOAT, A_NULL);
+            gensym("tolerance"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_colorfilt::floatRMessCallback,
-  		  gensym("R"), A_FLOAT, A_NULL);
+            gensym("R"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_colorfilt::floatGMessCallback,
-  		  gensym("G"), A_FLOAT, A_NULL);
+            gensym("G"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_colorfilt::floatBMessCallback,
-  		  gensym("B"), A_FLOAT, A_NULL);
+            gensym("B"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_colorfilt::pickMessCallback,
-  		  gensym("pick"), A_FLOAT, A_FLOAT, A_NULL);
+            gensym("pick"), A_FLOAT, A_FLOAT, A_NULL);
 }
 
 void pix_opencv_colorfilt :: floatToleranceMessCallback(void *data, t_floatarg tolerance)

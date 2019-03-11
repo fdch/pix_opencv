@@ -65,7 +65,7 @@ class GEM_EXPORT pix_opencv_opticalflow : public GemPixObj
   public:
 
   //////////
-	// Constructor
+    // Constructor
   pix_opencv_opticalflow();
       
   protected:
@@ -93,4 +93,4 @@ class GEM_EXPORT pix_opencv_opticalflow : public GemPixObj
   t_outlet *m_dataout_middle; // contour outlet
   t_outlet *m_dataout_right; // info outlet
 };
-#endif	// for header file
+#endif    // for header file

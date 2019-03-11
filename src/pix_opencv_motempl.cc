@@ -82,11 +82,11 @@ pix_opencv_motempl :: pix_opencv_motempl()
 /////////////////////////////////////////////////////////
 pix_opencv_motempl :: ~pix_opencv_motempl()
 {
-    	//Destroy cv_images to clean memory
-    	cvReleaseImage( &rgb );
-    	cvReleaseImage( &motion );
-    	cvReleaseImage( &rgba );
-    	cvReleaseImage( &grey );
+        //Destroy cv_images to clean memory
+        cvReleaseImage( &rgb );
+        cvReleaseImage( &motion );
+        cvReleaseImage( &rgba );
+        cvReleaseImage( &grey );
 }
 
 /////////////////////////////////////////////////////////
@@ -110,22 +110,22 @@ void pix_opencv_motempl :: processRGBAImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)&&(this->comp_ysize!=image.ysize)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-    	cvReleaseImage( &rgb );
-    	cvReleaseImage( &motion );
-    	cvReleaseImage( &rgba );
-    	cvReleaseImage( &grey );
+        //Destroy cv_images to clean memory
+        cvReleaseImage( &rgb );
+        cvReleaseImage( &motion );
+        cvReleaseImage( &rgba );
+        cvReleaseImage( &grey );
 
-	//Create cv_images 
-    	rgb = cvCreateImage(cvSize(image.xsize, image.ysize), IPL_DEPTH_8U, 3);
-    	motion = cvCreateImage( cvSize(rgb->width,rgb->height), 8, 3 );
-    	cvZero( motion );
-    	motion->origin = rgb->origin;
-    	rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
-    	grey = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
+    //Create cv_images 
+        rgb = cvCreateImage(cvSize(image.xsize, image.ysize), IPL_DEPTH_8U, 3);
+        motion = cvCreateImage( cvSize(rgb->width,rgb->height), 8, 3 );
+        cvZero( motion );
+        motion->origin = rgb->origin;
+        rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
+        grey = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
     }
     memcpy( rgba->imageData, image.data, image.xsize*image.ysize*4 );
     
@@ -285,22 +285,22 @@ void pix_opencv_motempl :: processRGBImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)&&(this->comp_ysize!=image.ysize)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-    	cvReleaseImage( &rgb );
-    	cvReleaseImage( &motion );
-    	cvReleaseImage( &rgba );
-    	cvReleaseImage( &grey );
+        //Destroy cv_images to clean memory
+        cvReleaseImage( &rgb );
+        cvReleaseImage( &motion );
+        cvReleaseImage( &rgba );
+        cvReleaseImage( &grey );
 
-	//Create cv_images 
-    	rgb = cvCreateImage(cvSize(image.xsize, image.ysize), IPL_DEPTH_8U, 3);
-    	motion = cvCreateImage( cvSize(rgb->width,rgb->height), 8, 3 );
-    	cvZero( motion );
-    	motion->origin = rgb->origin;
-    	rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
-    	grey = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
+    //Create cv_images 
+        rgb = cvCreateImage(cvSize(image.xsize, image.ysize), IPL_DEPTH_8U, 3);
+        motion = cvCreateImage( cvSize(rgb->width,rgb->height), 8, 3 );
+        cvZero( motion );
+        motion->origin = rgb->origin;
+        rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
+        grey = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
     memcpy( rgb->imageData, image.data, image.xsize*image.ysize*3 );
@@ -442,7 +442,7 @@ void pix_opencv_motempl :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_motempl : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_motempl :: processGrayImage(imageStruct &image)
 { 
  double timestamp = (double)clock()/CLOCKS_PER_SEC; // get current time in seconds
@@ -460,22 +460,22 @@ void pix_opencv_motempl :: processGrayImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)&&(this->comp_ysize!=image.ysize)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-    	cvReleaseImage( &rgb );
-    	cvReleaseImage( &motion );
-    	cvReleaseImage( &rgba );
-    	cvReleaseImage( &grey );
+        //Destroy cv_images to clean memory
+        cvReleaseImage( &rgb );
+        cvReleaseImage( &motion );
+        cvReleaseImage( &rgba );
+        cvReleaseImage( &grey );
 
-	//Create cv_images 
-    	rgb = cvCreateImage(cvSize(image.xsize, image.ysize), IPL_DEPTH_8U, 3);
-    	motion = cvCreateImage( cvSize(rgb->width,rgb->height), 8, 3 );
-    	cvZero( motion );
-    	motion->origin = rgb->origin;
-    	rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
-    	grey = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
+    //Create cv_images 
+        rgb = cvCreateImage(cvSize(image.xsize, image.ysize), IPL_DEPTH_8U, 3);
+        motion = cvCreateImage( cvSize(rgb->width,rgb->height), 8, 3 );
+        cvZero( motion );
+        motion->origin = rgb->origin;
+        rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
+        grey = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
     memcpy( grey->imageData, image.data, image.xsize*image.ysize );
@@ -607,7 +607,7 @@ void pix_opencv_motempl :: processGrayImage(imageStruct &image)
           SETFLOAT(&rlist[3], comp_rect.width);
           SETFLOAT(&rlist[4], comp_rect.height);
           SETFLOAT(&rlist[5], angle);
-    	  outlet_list( m_dataout, 0, 6, rlist );
+          outlet_list( m_dataout, 0, 6, rlist );
         }
     }
 
@@ -625,9 +625,9 @@ void pix_opencv_motempl :: processGrayImage(imageStruct &image)
 void pix_opencv_motempl :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_motempl::thresholdMessCallback,
-  		  gensym("ft1"), A_FLOAT, A_NULL);
+            gensym("ft1"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_motempl::mhi_durationMessCallback,
-		  gensym("mhi_duration"), A_FLOAT, A_NULL);
+          gensym("mhi_duration"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_motempl::max_time_deltaMessCallback, gensym("max_time_delta"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_motempl::min_time_deltaMessCallback, gensym("min_time_delta"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_motempl::frame_buffer_numMessCallback, gensym("frame_buffer_num"), A_FLOAT, A_NULL);

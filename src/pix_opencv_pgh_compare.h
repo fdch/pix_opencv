@@ -38,25 +38,25 @@ class GEM_EXPORT pix_opencv_pgh_compare : public GemPixDualObj
 
     public:
 
-	    //////////
-    	// Constructor
-    	pix_opencv_pgh_compare(int,t_atom*);
-    	
-    protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_pgh_compare();
-
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBA_RGBA(imageStruct &left, imageStruct &right);
-    	virtual void 	processRGB_RGB(imageStruct &left, imageStruct &right);
-    	virtual void 	processYUV_YUV(imageStruct &left, imageStruct &right);
-      	virtual void 	processGray_Gray(imageStruct &left, imageStruct &right);
+        //////////
+        // Constructor
+        pix_opencv_pgh_compare(int,t_atom*);
         
-    	//////////
-    	// change method used
+    protected:
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_pgh_compare();
+
+        //////////
+        // Do the processing
+        virtual void     processRGBA_RGBA(imageStruct &left, imageStruct &right);
+        virtual void     processRGB_RGB(imageStruct &left, imageStruct &right);
+        virtual void     processYUV_YUV(imageStruct &left, imageStruct &right);
+          virtual void     processGray_Gray(imageStruct &left, imageStruct &right);
+        
+        //////////
+        // change method used
         void            floatMinSizeMess(float minsize);
         void            clearMess(void);
         void            floatCriteriaMess(float criteria);
@@ -72,8 +72,8 @@ class GEM_EXPORT pix_opencv_pgh_compare : public GemPixDualObj
 
     private:
     
-    	//////////
-    	// Static member functions
+        //////////
+        // Static member functions
         static void            floatMinSizeMessCallback(void *data, float minsize);
         static void            clearMessCallback(void *data);
         static void            floatCriteriaMessCallback(void *data, float criteria);
@@ -88,4 +88,4 @@ class GEM_EXPORT pix_opencv_pgh_compare : public GemPixDualObj
 
 };
 
-#endif	// for header file
+#endif    // for header file

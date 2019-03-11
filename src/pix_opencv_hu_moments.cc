@@ -63,21 +63,21 @@ void pix_opencv_hu_moments :: processRGBAImage(imageStruct &image)
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!rgba)) 
   {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
+        //Destroy cv_images to clean memory
         if ( rgba )
         {
-	  cvReleaseImage(&rgba);
-    	  cvReleaseImage(&rgb);
-    	  cvReleaseImage(&gray);
+      cvReleaseImage(&rgba);
+          cvReleaseImage(&rgb);
+          cvReleaseImage(&gray);
         }
 
-	//create the orig image with new size
+    //create the orig image with new size
         rgba = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
         rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
-    	gray = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 1);
+        gray = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 1);
     }
 
     memcpy( rgba->imageData, image.data, image.xsize*image.ysize*4 );
@@ -103,21 +103,21 @@ void pix_opencv_hu_moments :: processRGBImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!rgb)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
+        //Destroy cv_images to clean memory
         if ( rgb )
         {
-	  cvReleaseImage(&rgba);
-    	  cvReleaseImage(&rgb);
-    	  cvReleaseImage(&gray);
+      cvReleaseImage(&rgba);
+          cvReleaseImage(&rgb);
+          cvReleaseImage(&gray);
         }
 
-	//create the orig image with new size
+    //create the orig image with new size
         rgba = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
         rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
-    	gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
+        gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
     
     }
     memcpy( rgb->imageData, image.data, image.xsize*image.ysize*3 );
@@ -141,28 +141,28 @@ void pix_opencv_hu_moments :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_hu_moments : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_hu_moments :: processGrayImage(imageStruct &image)
 { 
   unsigned char *pixels = image.data;
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!rgb)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
+        //Destroy cv_images to clean memory
         if ( rgb )
         {
-	  cvReleaseImage(&rgba);
-    	  cvReleaseImage(&rgb);
-    	  cvReleaseImage(&gray);
+      cvReleaseImage(&rgba);
+          cvReleaseImage(&rgb);
+          cvReleaseImage(&gray);
         }
 
-	//create the orig image with new size
+    //create the orig image with new size
         rgba = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
         rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
-    	gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
+        gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
     
     }
     memcpy( gray->imageData, image.data, image.xsize*image.ysize );
@@ -197,7 +197,7 @@ void pix_opencv_hu_moments :: floatBinaryMess (float binary)
 void pix_opencv_hu_moments :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_hu_moments::floatBinaryMessCallback,
-  		  gensym("binary"), A_FLOAT, A_NULL);
+            gensym("binary"), A_FLOAT, A_NULL);
 }
 
 void pix_opencv_hu_moments :: floatBinaryMessCallback(void *data, t_floatarg binary)

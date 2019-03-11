@@ -46,10 +46,10 @@ class GEM_EXPORT pix_opencv_backgroundsubtractor: public GemPixObj
 
   public:
 
-	  //////////
-	  // Constructor
+      //////////
+      // Constructor
     pix_opencv_backgroundsubtractor();
-    	
+        
   protected:
   
     // Message handling
@@ -60,14 +60,14 @@ class GEM_EXPORT pix_opencv_backgroundsubtractor: public GemPixObj
     void algoMess(t_symbol *s, int argc, t_atom* argv);
     void cpuModeMess(int val);
 
-    	
-   	//////////
-   	// Destructor
-   	virtual ~pix_opencv_backgroundsubtractor();
+        
+       //////////
+       // Destructor
+       virtual ~pix_opencv_backgroundsubtractor();
 
-   	//////////
-   	// Do the processing
-   	virtual void 	processImage(imageStruct &image);
+       //////////
+       // Do the processing
+       virtual void     processImage(imageStruct &image);
     virtual void  startRendering();
     virtual void  stopRendering();
     
@@ -107,4 +107,4 @@ class GEM_EXPORT pix_opencv_backgroundsubtractor: public GemPixObj
     std::vector<std::string> m_bgsub_algos;
   
 };
-#endif	// for header file
+#endif    // for header file

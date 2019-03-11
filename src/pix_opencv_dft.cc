@@ -149,7 +149,7 @@ void pix_opencv_dft :: processRGBAImage(imageStruct &image)
         this->comp_xsize=image.xsize;
         this->comp_ysize=image.ysize;
 
-    	//Destroy cv_images to clean memory
+        //Destroy cv_images to clean memory
         cvReleaseImage( &rgb );
         cvReleaseImage( &rgba );
         //cvReleaseImage( &gray );
@@ -162,7 +162,7 @@ void pix_opencv_dft :: processRGBAImage(imageStruct &image)
         //cvReleaseImage( &image_mout );
         //cvReleaseImage( &image_pout );
 
-	//Create cv_images 
+    //Create cv_images 
         rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
         rgba = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
         gray = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 1);
@@ -251,7 +251,7 @@ void pix_opencv_dft :: processRGBImage(imageStruct &image)
         this->comp_xsize=image.xsize;
         this->comp_ysize=image.ysize;
 
-    	//Destroy cv_images to clean memory
+        //Destroy cv_images to clean memory
         cvReleaseImage( &rgb );
         cvReleaseImage( &rgba );
         //cvReleaseImage( &gray );
@@ -264,7 +264,7 @@ void pix_opencv_dft :: processRGBImage(imageStruct &image)
         //cvReleaseImage( &image_mout );
         //cvReleaseImage( &image_pout );
 
-	//Create cv_images 
+    //Create cv_images 
         rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
         rgba = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
         gray = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 1);
@@ -344,7 +344,7 @@ void pix_opencv_dft :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_contours_convexity : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_dft :: processGrayImage(imageStruct &image)
 { 
   unsigned char *pixels = image.data;
@@ -358,7 +358,7 @@ void pix_opencv_dft :: processGrayImage(imageStruct &image)
         this->comp_xsize=image.xsize;
         this->comp_ysize=image.ysize;
 
-    	//Destroy cv_images to clean memory
+        //Destroy cv_images to clean memory
         cvReleaseImage( &rgb );
         cvReleaseImage( &rgba );
         //cvReleaseImage( &gray );
@@ -371,7 +371,7 @@ void pix_opencv_dft :: processGrayImage(imageStruct &image)
         //cvReleaseImage( &image_mout );
         //cvReleaseImage( &image_pout );
 
-	//Create cv_images 
+    //Create cv_images 
         rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
         rgba = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
         gray = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 1);
@@ -453,7 +453,7 @@ void pix_opencv_dft :: processGrayImage(imageStruct &image)
 void pix_opencv_dft :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_dft::calculateCallback,
-		  gensym("bang"), A_NULL);
+          gensym("bang"), A_NULL);
 }
 
 void pix_opencv_dft :: calculateCallback(void *data)

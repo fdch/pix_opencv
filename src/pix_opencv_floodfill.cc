@@ -213,7 +213,7 @@ void pix_opencv_floodfill :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_floodfill : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_floodfill :: processGrayImage(imageStruct &image)
 { 
   int i, k;
@@ -268,21 +268,21 @@ void pix_opencv_floodfill :: processGrayImage(imageStruct &image)
 void pix_opencv_floodfill :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_floodfill::colorMessCallback,
-		  gensym("color"), A_FLOAT, A_NULL);
+          gensym("color"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_floodfill::fillcolorMessCallback,
-		  gensym("fillcolor"), A_FLOAT, A_FLOAT, A_FLOAT, A_FLOAT, A_NULL);
+          gensym("fillcolor"), A_FLOAT, A_FLOAT, A_FLOAT, A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_floodfill::connectivityMessCallback,
-		  gensym("connectivity"), A_FLOAT, A_NULL);
+          gensym("connectivity"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_floodfill::markMessCallback,
-		  gensym("mark"), A_FLOAT, A_FLOAT, A_NULL);
+          gensym("mark"), A_FLOAT, A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_floodfill::deleteMessCallback,
-		  gensym("delete"), A_FLOAT, A_NULL);
+          gensym("delete"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_floodfill::clearMessCallback,
-		  gensym("clear"), A_NULL);
+          gensym("clear"), A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_floodfill::updiffMessCallback,
-		  gensym("up_diff"), A_FLOAT, A_NULL);
+          gensym("up_diff"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_floodfill::lodiffMessCallback,
-		  gensym("lo_diff"), A_FLOAT, A_NULL);
+          gensym("lo_diff"), A_FLOAT, A_NULL);
 }
 
 void  pix_opencv_floodfill :: colorMessCallback(void *data, t_floatarg color)

@@ -105,7 +105,7 @@ pix_opencv_hist_compare :: ~pix_opencv_hist_compare()
 // processImage
 //
 /////////////////////////////////////////////////////////
-    	
+        
 void pix_opencv_hist_compare :: processImage(imageStruct &image)
 { 
   int h_bins = (int)(comp_xsize/10), s_bins = (int)(comp_ysize/10);

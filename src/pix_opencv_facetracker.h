@@ -31,7 +31,7 @@ CLASS
     
   FaceTracker implementation
   * see https://github.com/kylemcdonald/FaceTracker
-	
+    
 KEYWORDS
     pix
     
@@ -56,7 +56,7 @@ class GEM_EXPORT pix_opencv_facetracker : public GemPixObj
 
     //////////
     // Do the processing
-    virtual void 	processImage(imageStruct &image);
+    virtual void     processImage(imageStruct &image);
     
     void resetMess(void);
     void showMess(int);
@@ -104,4 +104,4 @@ class GEM_EXPORT pix_opencv_facetracker : public GemPixObj
     t_symbol* m_arraysname[13];
              
 };
-#endif	// for header file
+#endif    // for header file

@@ -28,8 +28,8 @@ LOG
 CLASS
     pix_opencv_matchshape
     
-	square pattern detector
-	
+    square pattern detector
+    
 KEYWORDS
     pix
     
@@ -42,33 +42,33 @@ class GEM_EXPORT pix_opencv_matchshape : public GemPixObj
 
     public:
 
-	// Constructor
-	pix_opencv_matchshape();
-    	
+    // Constructor
+    pix_opencv_matchshape();
+        
     protected:
     // process messages
     void clearMess(void);
     void templateMess(t_symbol*s, int argc, t_atom*argv);
-	void contourMess(t_symbol*s, int argc, t_atom*argv);
-	void thresholdMess(float arg);
-	void methodMess(int arg);
-	
-   	// Destructor
-   	virtual ~pix_opencv_matchshape();
+    void contourMess(t_symbol*s, int argc, t_atom*argv);
+    void thresholdMess(float arg);
+    void methodMess(int arg);
+    
+       // Destructor
+       virtual ~pix_opencv_matchshape();
 
-   	// Do the processing
-   	virtual void 	processRGBAImage(imageStruct &image);
-   	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-   	virtual void 	processGrayImage(imageStruct &image);
+       // Do the processing
+       virtual void     processRGBAImage(imageStruct &image);
+       virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+       virtual void     processGrayImage(imageStruct &image);
 
     private:
     
     t_outlet *m_dataout; // info outlet
     double m_threshold;
     int m_method;
-    std::vector<std::vector<cv::Point2f> > 	m_template_vec_vec;
-    std::vector<cv::Mat> 					m_template_vec_mat;
-	    
+    std::vector<std::vector<cv::Point2f> >     m_template_vec_vec;
+    std::vector<cv::Mat>                     m_template_vec_mat;
+        
 };
-#endif	// for header file
+#endif    // for header file

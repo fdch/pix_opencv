@@ -84,7 +84,7 @@ void pix_opencv_findchessboardcorners :: processYUVImage(imageStruct &image)
   // TODO
   error( "pix_opencv_findchessboardcorners : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_findchessboardcorners :: processGrayImage(imageStruct &image)
 { 
   gray = cv::Mat(cv::Size(image.xsize, image.ysize), CV_8UC1, image.data);
@@ -94,24 +94,24 @@ void pix_opencv_findchessboardcorners :: processGrayImage(imageStruct &image)
 
 void pix_opencv_findchessboardcorners::process()
 {
-	patternfound = findChessboardCorners(gray, pattern_size, corners,
+    patternfound = findChessboardCorners(gray, pattern_size, corners,
         CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE
         + CALIB_CB_FAST_CHECK);
-	if(patternfound)
-	  cornerSubPix(gray, corners, Size(11, 11), Size(-1, -1),
-	    TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 30, 0.1));
-	
+    if(patternfound)
+      cornerSubPix(gray, corners, Size(11, 11), Size(-1, -1),
+        TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 30, 0.1));
+    
     // send out corners screen coordinates if all corners have been found
     if (patternfound) {
-		int i=0;
-		for (const auto& pt : corners)
-		{
-		  SETFLOAT(&coord_list[i*2], pt.x);
-		  SETFLOAT(&coord_list[i*2+1], pt.y);
-		  i++;
-		}
-		outlet_list( m_dataout, 0, corners.size()*2, coord_list );
-	}
+        int i=0;
+        for (const auto& pt : corners)
+        {
+          SETFLOAT(&coord_list[i*2], pt.x);
+          SETFLOAT(&coord_list[i*2+1], pt.y);
+          i++;
+        }
+        outlet_list( m_dataout, 0, corners.size()*2, coord_list );
+    }
 }
 
 /////////////////////////////////////////////////////////
@@ -120,14 +120,14 @@ void pix_opencv_findchessboardcorners::process()
 /////////////////////////////////////////////////////////
 void pix_opencv_findchessboardcorners :: patternSizeMess (int xsize, int ysize)
 {
-	if ( xsize < 3 || ysize < 3 ) {
-		error("patternSize should be at least 3x3"); 
-		return;
-	}
-	pattern_size=cvSize(xsize,ysize);
-	// update corners array & output list size
-	delete coord_list;
-	coord_list = new t_atom[pattern_size.width * pattern_size.height * 2];
+    if ( xsize < 3 || ysize < 3 ) {
+        error("patternSize should be at least 3x3"); 
+        return;
+    }
+    pattern_size=cvSize(xsize,ysize);
+    // update corners array & output list size
+    delete coord_list;
+    coord_list = new t_atom[pattern_size.width * pattern_size.height * 2];
 }
 
 /////////////////////////////////////////////////////////
@@ -136,12 +136,12 @@ void pix_opencv_findchessboardcorners :: patternSizeMess (int xsize, int ysize)
 /////////////////////////////////////////////////////////
 void pix_opencv_findchessboardcorners :: obj_setupCallback(t_class *classPtr)
 {
-	// TODO add support for message : win, zero_zone, flags and criteria
-	  class_addmethod(classPtr, (t_method)&pix_opencv_findchessboardcorners::patternSizeMessCallback,
-  		  gensym("patternSize"), A_FLOAT, A_FLOAT, A_NULL);	 
+    // TODO add support for message : win, zero_zone, flags and criteria
+      class_addmethod(classPtr, (t_method)&pix_opencv_findchessboardcorners::patternSizeMessCallback,
+            gensym("patternSize"), A_FLOAT, A_FLOAT, A_NULL);     
 }
 
 void pix_opencv_findchessboardcorners :: patternSizeMessCallback(void *data, t_floatarg xsize, t_floatarg ysize)
 {
-		GetMyClass(data)->patternSizeMess((int)xsize, (int)ysize);
+        GetMyClass(data)->patternSizeMess((int)xsize, (int)ysize);
 }

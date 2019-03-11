@@ -52,11 +52,11 @@ pix_opencv_morphology :: pix_opencv_morphology()
 /////////////////////////////////////////////////////////
 pix_opencv_morphology :: ~pix_opencv_morphology()
 {
-    	//Destroy cv_images to clean memory
-    	cvReleaseImage( &rgb );
-    	cvReleaseImage( &dst );
-    	cvReleaseImage( &rgba );
-    	cvReleaseImage( &grey );
+        //Destroy cv_images to clean memory
+        cvReleaseImage( &rgb );
+        cvReleaseImage( &dst );
+        cvReleaseImage( &rgba );
+        cvReleaseImage( &grey );
 }
 
 /////////////////////////////////////////////////////////
@@ -70,20 +70,20 @@ void pix_opencv_morphology :: processRGBAImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!rgba)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-    	cvReleaseImage( &rgb );
-    	cvReleaseImage( &dst );
-    	cvReleaseImage( &rgba );
-    	cvReleaseImage( &grey );
+        //Destroy cv_images to clean memory
+        cvReleaseImage( &rgb );
+        cvReleaseImage( &dst );
+        cvReleaseImage( &rgba );
+        cvReleaseImage( &grey );
 
-	//Create cv_images 
-    	rgb = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 3 );
-	dst = cvCloneImage(rgb);
-    	rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
-    	grey = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
+    //Create cv_images 
+        rgb = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 3 );
+    dst = cvCloneImage(rgb);
+        rgba = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
+        grey = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
     memcpy( rgba->imageData, image.data, image.xsize*image.ysize*4 );
@@ -91,34 +91,34 @@ void pix_opencv_morphology :: processRGBAImage(imageStruct &image)
     cvCvtColor(rgba, rgb, CV_RGBA2RGB);
 
     if (this->mode == 1) { //open/close
-    	int n = pos;
-    	int an = n > 0 ? n : -n;
-    	element = cvCreateStructuringElementEx( an*2+1, an*2+1, an, an, element_shape, 0 );
-    	if( n < 0 )
-    	{
-        	cvErode(rgb,dst,element,1);
-        	cvDilate(dst,dst,element,1);
-    	}
-    	else
-    	{
-        	cvDilate(rgb,dst,element,1);
-        	cvErode(dst,dst,element,1);
-    	}
-    	cvReleaseStructuringElement(&element);
+        int n = pos;
+        int an = n > 0 ? n : -n;
+        element = cvCreateStructuringElementEx( an*2+1, an*2+1, an, an, element_shape, 0 );
+        if( n < 0 )
+        {
+            cvErode(rgb,dst,element,1);
+            cvDilate(dst,dst,element,1);
+        }
+        else
+        {
+            cvDilate(rgb,dst,element,1);
+            cvErode(dst,dst,element,1);
+        }
+        cvReleaseStructuringElement(&element);
 
     } else {
-    	int n = pos;
-    	int an = n > 0 ? n : -n;
-    	element = cvCreateStructuringElementEx( an*2+1, an*2+1, an, an, element_shape, 0 );
-    	if( n < 0 )
-    	{
-        	cvErode(rgb,dst,element,1);
-    	}
-    	else
-    	{
-        	cvDilate(rgb,dst,element,1);
-    	}
-    	cvReleaseStructuringElement(&element);
+        int n = pos;
+        int an = n > 0 ? n : -n;
+        element = cvCreateStructuringElementEx( an*2+1, an*2+1, an, an, element_shape, 0 );
+        if( n < 0 )
+        {
+            cvErode(rgb,dst,element,1);
+        }
+        else
+        {
+            cvDilate(rgb,dst,element,1);
+        }
+        cvReleaseStructuringElement(&element);
 
     }
 
@@ -133,49 +133,49 @@ void pix_opencv_morphology :: processRGBImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!rgb)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-    	cvReleaseImage( &rgb );
-    	cvReleaseImage( &dst );
+        //Destroy cv_images to clean memory
+        cvReleaseImage( &rgb );
+        cvReleaseImage( &dst );
 
-	//Create cv_images 
-    	rgb = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
-	dst = cvCloneImage(rgb);
+    //Create cv_images 
+        rgb = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 4 );
+    dst = cvCloneImage(rgb);
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
     memcpy( rgb->imageData, image.data, image.xsize*image.ysize*3 );
 
     if (this->mode == 1) { //open/close
-    	int n = pos;
-    	int an = n > 0 ? n : -n;
-    	element = cvCreateStructuringElementEx( an*2+1, an*2+1, an, an, element_shape, 0 );
-    	if( n < 0 )
-    	{
-        	cvErode(rgb,dst,element,1);
-        	cvDilate(dst,dst,element,1);
-    	}
-    	else
-    	{
-        	cvDilate(rgb,dst,element,1);
-        	cvErode(dst,dst,element,1);
-    	}
-    	cvReleaseStructuringElement(&element);
+        int n = pos;
+        int an = n > 0 ? n : -n;
+        element = cvCreateStructuringElementEx( an*2+1, an*2+1, an, an, element_shape, 0 );
+        if( n < 0 )
+        {
+            cvErode(rgb,dst,element,1);
+            cvDilate(dst,dst,element,1);
+        }
+        else
+        {
+            cvDilate(rgb,dst,element,1);
+            cvErode(dst,dst,element,1);
+        }
+        cvReleaseStructuringElement(&element);
 
     } else {
-    	int n = pos;
-    	int an = n > 0 ? n : -n;
-    	element = cvCreateStructuringElementEx( an*2+1, an*2+1, an, an, element_shape, 0 );
-    	if( n < 0 )
-    	{
-        	cvErode(rgb,dst,element,1);
-    	}
-    	else
-    	{
-        	cvDilate(rgb,dst,element,1);
-    	}
-    	cvReleaseStructuringElement(&element);
+        int n = pos;
+        int an = n > 0 ? n : -n;
+        element = cvCreateStructuringElementEx( an*2+1, an*2+1, an, an, element_shape, 0 );
+        if( n < 0 )
+        {
+            cvErode(rgb,dst,element,1);
+        }
+        else
+        {
+            cvDilate(rgb,dst,element,1);
+        }
+        cvReleaseStructuringElement(&element);
 
     }
 
@@ -187,7 +187,7 @@ void pix_opencv_morphology :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_morphology : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_morphology :: processGrayImage(imageStruct &image)
 { 
   unsigned char *pixels = image.data;
@@ -195,18 +195,18 @@ void pix_opencv_morphology :: processGrayImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!grey)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-    	cvReleaseImage( &rgb );
-    	cvReleaseImage( &dst );
-    	cvReleaseImage( &grey );
+        //Destroy cv_images to clean memory
+        cvReleaseImage( &rgb );
+        cvReleaseImage( &dst );
+        cvReleaseImage( &grey );
 
-	//Create cv_images 
-    	rgb = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 3 );
-	dst = cvCloneImage(rgb);
-    	grey = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
+    //Create cv_images 
+        rgb = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 3 );
+    dst = cvCloneImage(rgb);
+        grey = cvCreateImage( cvSize(image.xsize, image.ysize), 8, 1 );
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
     memcpy( grey->imageData, image.data, image.xsize*image.ysize );
@@ -214,34 +214,34 @@ void pix_opencv_morphology :: processGrayImage(imageStruct &image)
     cvCvtColor(grey, rgb, CV_GRAY2RGB);
     
     if (this->mode == 1) { //open/close
-    	int n = pos;
-    	int an = n > 0 ? n : -n;
-    	element = cvCreateStructuringElementEx( an*2+1, an*2+1, an, an, element_shape, 0 );
-    	if( n < 0 )
-    	{
-        	cvErode(rgb,dst,element,1);
-        	cvDilate(dst,dst,element,1);
-    	}
-    	else
-    	{
-        	cvDilate(rgb,dst,element,1);
-        	cvErode(dst,dst,element,1);
-    	}
-    	cvReleaseStructuringElement(&element);
+        int n = pos;
+        int an = n > 0 ? n : -n;
+        element = cvCreateStructuringElementEx( an*2+1, an*2+1, an, an, element_shape, 0 );
+        if( n < 0 )
+        {
+            cvErode(rgb,dst,element,1);
+            cvDilate(dst,dst,element,1);
+        }
+        else
+        {
+            cvDilate(rgb,dst,element,1);
+            cvErode(dst,dst,element,1);
+        }
+        cvReleaseStructuringElement(&element);
 
     } else {
-    	int n = pos;
-    	int an = n > 0 ? n : -n;
-    	element = cvCreateStructuringElementEx( an*2+1, an*2+1, an, an, element_shape, 0 );
-    	if( n < 0 )
-    	{
-        	cvErode(rgb,dst,element,1);
-    	}
-    	else
-    	{
-        	cvDilate(rgb,dst,element,1);
-    	}
-    	cvReleaseStructuringElement(&element);
+        int n = pos;
+        int an = n > 0 ? n : -n;
+        element = cvCreateStructuringElementEx( an*2+1, an*2+1, an, an, element_shape, 0 );
+        if( n < 0 )
+        {
+            cvErode(rgb,dst,element,1);
+        }
+        else
+        {
+            cvDilate(rgb,dst,element,1);
+        }
+        cvReleaseStructuringElement(&element);
 
     }
 
@@ -266,11 +266,11 @@ void pix_opencv_morphology :: floatPosMess (float pos)
 void pix_opencv_morphology :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_morphology::floatPosMessCallback,
-  		  gensym("ft1"), A_FLOAT, A_NULL);
+            gensym("ft1"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_morphology::modeMessCallback,
-		  gensym("mode"), A_DEFFLOAT, A_NULL);
+          gensym("mode"), A_DEFFLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_morphology::shapeMessCallback,
-		  gensym("shape"), A_DEFFLOAT, A_NULL);
+          gensym("shape"), A_DEFFLOAT, A_NULL);
 }
 void pix_opencv_morphology :: floatPosMessCallback(void *data, t_floatarg pos)
 {

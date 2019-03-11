@@ -391,7 +391,7 @@ void pix_opencv_trackKnn :: outputBlob(){
     if (!(ay = (t_garray *)pd_findbyclass(m_y_arrayname, garray_class))){
       error("%s: no such array", m_y_arrayname->s_name);
       return;
-    }		
+    }        
     if (!(aid = (t_garray *)pd_findbyclass(m_id_arrayname, garray_class))){
       error("%s: no such array", m_id_arrayname->s_name);
       return;

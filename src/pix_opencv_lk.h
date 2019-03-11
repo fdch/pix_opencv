@@ -16,12 +16,10 @@ LOG
 #ifndef INCLUDE_PIX_OPENCV_LK_H_
 #define INCLUDE_PIX_OPENCV_LK_H_
 
-#ifndef _EiC
-// #include "opencv2/legacy/legacy.hpp"
-#include "opencv2/imgproc.hpp"
-#include "opencv2/video/tracking.hpp"
 
-#endif
+#include "opencv2/imgproc.hpp"
+#include "opencv2/core/types.hpp"
+#include "opencv2/video/tracking_c.h"
 
 #include "Base/GemPixObj.h"
 
@@ -47,22 +45,22 @@ class GEM_EXPORT pix_opencv_lk : public GemPixObj
 
     public:
 
-	//////////
-	// Constructor
-    	pix_opencv_lk();
-    	
+    //////////
+    // Constructor
+        pix_opencv_lk();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_lk();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_lk();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+        virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
 
         void  winSizeMess(float winsize);
         void  nightModeMess(float nightmode);
@@ -94,8 +92,8 @@ class GEM_EXPORT pix_opencv_lk : public GemPixObj
 
     private:
     
-    	//////////
-    	// Static member functions
+        //////////
+        // Static member functions
         static void  winSizeMessCallback(void *data, t_floatarg winsize);
         static void  nightModeMessCallback(void *data, t_floatarg nightmode);
         static void  qualityMessCallback(void *data, t_floatarg quality);
@@ -109,7 +107,7 @@ class GEM_EXPORT pix_opencv_lk : public GemPixObj
         static void  delaunayMessCallback(void *data, t_symbol *s);
         static void  pdelaunayMessCallback(void *data, t_floatarg fpoint, t_floatarg fthreshold);
 
-	// Internal Open CV data
+    // Internal Open CV data
         IplImage *rgba, *rgb, *orgb, *gray, *ogray, *prev_gray, *pyramid, *prev_pyramid, *swap_temp;
         int x_xmark[MAX_MARKERS];
         int x_ymark[MAX_MARKERS];
@@ -122,12 +120,12 @@ class GEM_EXPORT pix_opencv_lk : public GemPixObj
         int add_remove_pt;
         CvPoint pt;
         CvFont font;
-
+#if 0
         // structures needed for the delaunay
         CvRect x_fullrect;
         CvMemStorage* x_storage;
         CvSubdiv2D* x_subdiv;
-	
+#endif    
 };
 
-#endif	// for header file
+#endif    // for header file

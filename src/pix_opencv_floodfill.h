@@ -45,22 +45,22 @@ class GEM_EXPORT pix_opencv_floodfill : public GemPixObj
 
     public:
 
-	//////////
-	// Constructor
-    	pix_opencv_floodfill();
-    	
+    //////////
+    // Constructor
+        pix_opencv_floodfill();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_floodfill();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_floodfill();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
 
         void  colorMess(float color);
         void  fillcolorMess(float index, float r, float g, float b);
@@ -85,8 +85,8 @@ class GEM_EXPORT pix_opencv_floodfill : public GemPixObj
 
     private:
     
-    	//////////
-    	// Static member functions
+        //////////
+        // Static member functions
         static void  colorMessCallback(void *data, float color);
         static void  fillcolorMessCallback(void *data, float index, float r, float g, float b);
         static void  connectivityMessCallback(void *data, float connectivity);
@@ -96,7 +96,7 @@ class GEM_EXPORT pix_opencv_floodfill : public GemPixObj
         static void  updiffMessCallback(void *data, float updiff);
         static void  lodiffMessCallback(void *data, float lodiff);
 
-	// Internal Open CV data
+    // Internal Open CV data
         // tracked components
         int x_xcomp[MAX_COMPONENTS];
         int x_ycomp[MAX_COMPONENTS];
@@ -110,4 +110,4 @@ class GEM_EXPORT pix_opencv_floodfill : public GemPixObj
 
 };
 
-#endif	// for header file
+#endif    // for header file

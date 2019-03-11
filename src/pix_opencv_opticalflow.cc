@@ -32,10 +32,10 @@ CPPEXTERN_NEW(pix_opencv_opticalflow)
 /////////////////////////////////////////////////////////
 pix_opencv_opticalflow :: pix_opencv_opticalflow() : m_gain(1.)
 { 
-	m_dataout_middle = outlet_new(this->x_obj, 0);
-	m_dataout_right = outlet_new(this->x_obj, 0);
+    m_dataout_middle = outlet_new(this->x_obj, 0);
+    m_dataout_right = outlet_new(this->x_obj, 0);
   
-	//~ post("build on %s at %s", __DATE__, __TIME__);
+    //~ post("build on %s at %s", __DATE__, __TIME__);
 }
 
 /////////////////////////////////////////////////////////
@@ -128,8 +128,8 @@ void pix_opencv_opticalflow :: processRGBAImage(imageStruct &image)
 /////////////////////////////////////////////////////////
 void pix_opencv_opticalflow :: obj_setupCallback(t_class *classPtr)
 {
-	CPPEXTERN_MSG1(classPtr, "gain",	gainMess, 		double);		    		  	  
-	CPPEXTERN_MSG1(classPtr, "normalize",	normalizeMess, 		double);		    		  	  
+    CPPEXTERN_MSG1(classPtr, "gain",    gainMess,         double);                            
+    CPPEXTERN_MSG1(classPtr, "normalize",    normalizeMess,         double);                            
 }
 
 /////////////////////////////////////////////////////////
@@ -138,12 +138,12 @@ void pix_opencv_opticalflow :: obj_setupCallback(t_class *classPtr)
 /////////////////////////////////////////////////////////
 void pix_opencv_opticalflow :: gainMess(double arg)
 {
-	m_gain = arg > 0 ? arg : 3.;
+    m_gain = arg > 0 ? arg : 3.;
 }
 
 void pix_opencv_opticalflow :: normalizeMess(double arg)
 {
-	m_normalize = arg > 0;
+    m_normalize = arg > 0;
 }
 
 

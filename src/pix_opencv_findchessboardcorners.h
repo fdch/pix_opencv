@@ -45,32 +45,32 @@ class GEM_EXPORT pix_opencv_findchessboardcorners : public GemPixObj
 
     public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_findchessboardcorners();
-    	
+        //////////
+        // Constructor
+        pix_opencv_findchessboardcorners();
+        
     protected:
 
         void process();
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_findchessboardcorners();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_findchessboardcorners();
 
-		//////////
-		// Do the processing
-		virtual void 	processRGBAImage(imageStruct &image);
-		virtual void 	processRGBImage(imageStruct &image);
-		virtual void 	processYUVImage(imageStruct &image);
-		virtual void 	processGrayImage(imageStruct &image);
-		
-		/////////
-		// Setup
-		void 	patternSizeMess (int xsize, int ysize);
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+        virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image);
+        
+        /////////
+        // Setup
+        void     patternSizeMess (int xsize, int ysize);
 
-		// to detect changes in the image size
-		int 	comp_xsize;
-		int		comp_ysize;
+        // to detect changes in the image size
+        int     comp_xsize;
+        int        comp_ysize;
         
         cv::Size pattern_size; // pattern size (inner corners count in 2D)
         std::vector<cv::Point2f> corners; // array to store corners coordinates
@@ -80,13 +80,13 @@ class GEM_EXPORT pix_opencv_findchessboardcorners : public GemPixObj
         t_atom *coord_list;
 
     private:
-		t_outlet *m_dataout;
-    	//////////
-    	// Static member functions
-		static void patternSizeMessCallback(void *data, t_floatarg xsize, t_floatarg ysize);
+        t_outlet *m_dataout;
+        //////////
+        // Static member functions
+        static void patternSizeMessCallback(void *data, t_floatarg xsize, t_floatarg ysize);
 
         cv::Mat gray;
         bool patternfound;
 };
 
-#endif	// for header file
+#endif    // for header file

@@ -47,22 +47,22 @@ class GEM_EXPORT pix_opencv_camshift : public GemPixObj
 
     public:
 
-	//////////
-	// Constructor
-    	pix_opencv_camshift();
-    	
+    //////////
+    // Constructor
+        pix_opencv_camshift();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_camshift();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_camshift();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
 
         void  backProjectMess(float backproject);
         void  vMinMess(float vmin);
@@ -87,8 +87,8 @@ class GEM_EXPORT pix_opencv_camshift : public GemPixObj
 
     private:
     
-    	//////////
-    	// Static member functions
+        //////////
+        // Static member functions
         static void  backProjectMessCallback(void *data, float backproject);
         static void  vMinMessCallback(void *data, float vmin);
         static void  vMaxMessCallback(void *data, float vmax);
@@ -97,7 +97,7 @@ class GEM_EXPORT pix_opencv_camshift : public GemPixObj
         static void  rWidthMessCallback(void *data, float rwidth);
         static void  rHeightMessCallback(void *data, float rheight);
 
-	// Internal Open CV data
+    // Internal Open CV data
         IplImage *rgba, *rgb, *gray, *hsv, *hue, *mask, *backproject;
         CvHistogram *hist;
         CvPoint origin;
@@ -109,4 +109,4 @@ class GEM_EXPORT pix_opencv_camshift : public GemPixObj
         t_atom x_list[5];
 };
 
-#endif	// for header file
+#endif    // for header file

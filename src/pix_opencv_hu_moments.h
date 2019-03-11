@@ -42,30 +42,30 @@ class GEM_EXPORT pix_opencv_hu_moments : public GemPixObj
 
     public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_hu_moments();
-    	
+        //////////
+        // Constructor
+        pix_opencv_hu_moments();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_hu_moments();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_hu_moments();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
-    	
-	//////////
-    	// Set the new edge threshold
-    	void	    	floatBinaryMess(float binary);
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
+        
+    //////////
+        // Set the new edge threshold
+        void            floatBinaryMess(float binary);
 
-	// to detect changes in the image size
-	int 		comp_xsize;
-	int		comp_ysize;
+    // to detect changes in the image size
+    int         comp_xsize;
+    int        comp_ysize;
 
         int       x_binary;
         t_outlet  *m_dataout;
@@ -73,15 +73,15 @@ class GEM_EXPORT pix_opencv_hu_moments : public GemPixObj
 
     private:
     
-    	//////////
-    	// Static member functions
-    	static void 	floatBinaryMessCallback(void *data, t_floatarg binary);
+        //////////
+        // Static member functions
+        static void     floatBinaryMessCallback(void *data, t_floatarg binary);
 
-	/////////
-	// IplImage needed
-    	IplImage 	*rgba, *rgb, *gray;
+    /////////
+    // IplImage needed
+        IplImage     *rgba, *rgb, *gray;
         CvMoments x_moments;
         CvHuMoments x_humoments;
 };
 
-#endif	// for header file
+#endif    // for header file

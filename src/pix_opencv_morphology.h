@@ -43,47 +43,47 @@ class GEM_EXPORT pix_opencv_morphology : public GemPixObj
 
     public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_morphology();
-    	
+        //////////
+        // Constructor
+        pix_opencv_morphology();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_morphology();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_morphology();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
-    	
-	//////////
-    	// Set the new pos
-    	void	    	floatPosMess(float pos);
-    	// Some varibales to control mophology mode
-    	int 		pos;
-    	int 		element_shape;
-    	int 		mode; //to switch between openclose or dilateerode modes
-	// to detect changes in the image size
-	int 		comp_xsize;
-	int		comp_ysize;
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
+        
+    //////////
+        // Set the new pos
+        void            floatPosMess(float pos);
+        // Some varibales to control mophology mode
+        int         pos;
+        int         element_shape;
+        int         mode; //to switch between openclose or dilateerode modes
+    // to detect changes in the image size
+    int         comp_xsize;
+    int        comp_ysize;
 
     private:
     
-    	//////////
-    	// Static member functions
-    	static void 	floatPosMessCallback(void *data, t_floatarg pos);
-    	static void 	modeMessCallback(void *data, t_floatarg mode);
-    	static void 	shapeMessCallback(void *data, t_floatarg f);
+        //////////
+        // Static member functions
+        static void     floatPosMessCallback(void *data, t_floatarg pos);
+        static void     modeMessCallback(void *data, t_floatarg mode);
+        static void     shapeMessCallback(void *data, t_floatarg f);
 
-    	// The output and temporary images
-    	IplImage	*rgba, *grey, *rgb, *dst;
-	
-    	IplConvKernel	*element;
-	
+        // The output and temporary images
+        IplImage    *rgba, *grey, *rgb, *dst;
+    
+        IplConvKernel    *element;
+    
 };
 
-#endif	// for header file
+#endif    // for header file

@@ -46,22 +46,22 @@ class GEM_EXPORT pix_opencv_hough_circles : public GemPixObj
 
     public:
 
-	//////////
-	// Constructor
-    	pix_opencv_hough_circles();
-    	
+    //////////
+    // Constructor
+        pix_opencv_hough_circles();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_hough_circles();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_hough_circles();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
 
         int comp_xsize;
         int comp_ysize;
@@ -84,8 +84,8 @@ class GEM_EXPORT pix_opencv_hough_circles : public GemPixObj
 
     private:
     
-    	//////////
-    	// Static member functions
+        //////////
+        // Static member functions
         static void     floatNightModeMessCallback(void *data, t_floatarg nightmode);
         static void     floatThresholdMessCallback(void *data, t_floatarg threshold);
         static void     floatThreshold2MessCallback(void *data, t_floatarg threshold);
@@ -93,7 +93,7 @@ class GEM_EXPORT pix_opencv_hough_circles : public GemPixObj
         static void     floatResolutionMessCallback(void *data, t_floatarg resolution);
         static void     floatMaxCirclesMessCallback(void *data, t_floatarg maxcircles);
 
-	// The output and temporary images
+    // The output and temporary images
         IplImage *rgba, *rgb, *gray;
         CvFont font;
         CvMemStorage* x_storage;
@@ -101,4 +101,4 @@ class GEM_EXPORT pix_opencv_hough_circles : public GemPixObj
         t_atom x_list[4];
 };
 
-#endif	// for header file
+#endif    // for header file

@@ -601,7 +601,7 @@ void pix_opencv_surf :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_surf : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_surf :: processGrayImage(imageStruct &image)
 { 
   int i, k;
@@ -856,23 +856,23 @@ void pix_opencv_surf :: processGrayImage(imageStruct &image)
 void pix_opencv_surf :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_surf::nightModeMessCallback,
-		  gensym("nightmode"), A_FLOAT, A_NULL);
+          gensym("nightmode"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_surf::hessianMessCallback,
-		  gensym("hessian"), A_FLOAT, A_NULL);
+          gensym("hessian"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_surf::markMessCallback,
-		  gensym("mark"), A_GIMME, A_NULL);
+          gensym("mark"), A_GIMME, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_surf::deleteMessCallback,
-		  gensym("delete"), A_FLOAT, A_NULL);
+          gensym("delete"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_surf::clearMessCallback,
-		  gensym("clear"), A_NULL);
+          gensym("clear"), A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_surf::maxMoveMessCallback,
-		  gensym("maxmove"), A_FLOAT, A_NULL);
+          gensym("maxmove"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_surf::ftoleranceMessCallback,
-		  gensym("ftolerance"), A_FLOAT, A_NULL);
+          gensym("ftolerance"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_surf::delaunayMessCallback,
-		  gensym("delaunay"), A_SYMBOL, A_NULL);
+          gensym("delaunay"), A_SYMBOL, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_surf::pdelaunayMessCallback,
-		  gensym("pdelaunay"), A_FLOAT, A_FLOAT, A_NULL);
+          gensym("pdelaunay"), A_FLOAT, A_FLOAT, A_NULL);
 }
 
 void  pix_opencv_surf :: nightModeMessCallback(void *data, t_floatarg nightmode)

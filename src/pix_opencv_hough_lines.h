@@ -46,22 +46,22 @@ class GEM_EXPORT pix_opencv_hough_lines : public GemPixObj
 
     public:
 
-	//////////
-	// Constructor
-    	pix_opencv_hough_lines();
-    	
+    //////////
+    // Constructor
+        pix_opencv_hough_lines();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_hough_lines();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_hough_lines();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
 
         int comp_xsize;
         int comp_ysize;
@@ -88,8 +88,8 @@ class GEM_EXPORT pix_opencv_hough_lines : public GemPixObj
 
     private:
     
-    	//////////
-    	// Static member functions
+        //////////
+        // Static member functions
         static void     floatNightModeMessCallback(void *data, t_float nightmode);
         static void     floatModeMessCallback(void *data, t_floatarg mode);
         static void     floatThresholdMessCallback(void *data, t_floatarg threshold);
@@ -99,7 +99,7 @@ class GEM_EXPORT pix_opencv_hough_lines : public GemPixObj
         static void     floatDResolutionMessCallback(void *data, t_floatarg dresolution);
         static void     floatMaxLinesMessCallback(void *data, t_floatarg maxlines);
 
-	// The output and temporary images
+    // The output and temporary images
         IplImage *rgba, *rgb, *gray;
         t_atom x_list[5];
 
@@ -109,4 +109,4 @@ class GEM_EXPORT pix_opencv_hough_lines : public GemPixObj
 
 };
 
-#endif	// for header file
+#endif    // for header file

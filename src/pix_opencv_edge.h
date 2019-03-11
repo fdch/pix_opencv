@@ -42,42 +42,42 @@ class GEM_EXPORT pix_opencv_edge : public GemPixObj
 
     public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_edge();
-    	
+        //////////
+        // Constructor
+        pix_opencv_edge();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_edge();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_edge();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
-    	
-	//////////
-    	// Set the new edge threshold
-    	void	    	floatThreshMess(float edge_thresh);
-    	// The new edge threshold
-	int 		edge_thresh;
-	// to detect changes in the image size
-	int 		comp_xsize;
-	int		comp_ysize;
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
+        
+    //////////
+        // Set the new edge threshold
+        void            floatThreshMess(float edge_thresh);
+        // The new edge threshold
+    int         edge_thresh;
+    // to detect changes in the image size
+    int         comp_xsize;
+    int        comp_ysize;
 
     private:
     
-    	//////////
-    	// Static member functions
-    	static void 	floatTreshMessCallback(void *data, t_floatarg edge_thresh);
+        //////////
+        // Static member functions
+        static void     floatTreshMessCallback(void *data, t_floatarg edge_thresh);
 
-	/////////
-	// IplImage needed
-    	IplImage 	*rgb, *orig, *cedge, *cedgergb, *gray, *edge;
-	
+    /////////
+    // IplImage needed
+        IplImage     *rgb, *orig, *cedge, *cedgergb, *gray, *edge;
+    
 };
 
-#endif	// for header file
+#endif    // for header file

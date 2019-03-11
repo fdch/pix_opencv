@@ -42,46 +42,46 @@ class GEM_EXPORT pix_opencv_bgsubstract : public GemPixObj
 
     public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_bgsubstract();
-    	
+        //////////
+        // Constructor
+        pix_opencv_bgsubstract();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_bgsubstract();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_bgsubstract();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
-    	
-	//////////
-    	// Set the new edge threshold
-    	void	    	floatThreshMess(float x_threshold);
-    	void	    	SetMess();
-    	// The new threshold
-	int 		x_threshold;
-	int 		x_set;
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
+        
+    //////////
+        // Set the new edge threshold
+        void            floatThreshMess(float x_threshold);
+        void            SetMess();
+        // The new threshold
+    int         x_threshold;
+    int         x_set;
 
-	// to detect changes in the image size
-	int 		comp_xsize;
-	int		comp_ysize;
+    // to detect changes in the image size
+    int         comp_xsize;
+    int        comp_ysize;
 
     private:
     
-    	//////////
-    	// Static member functions
-    	static void 	floatTreshMessCallback(void *data, t_floatarg thresh_value);
-    	static void 	SetMessCallback(void *data);
+        //////////
+        // Static member functions
+        static void     floatTreshMessCallback(void *data, t_floatarg thresh_value);
+        static void     SetMessCallback(void *data);
 
-	/////////
-	// IplImage needed
-    	IplImage 	*orig, *rgb, *gray, *prev_gray, *grayLow, *grayUp, *diff_8U;
-	
+    /////////
+    // IplImage needed
+        IplImage     *orig, *rgb, *gray, *prev_gray, *grayLow, *grayUp, *diff_8U;
+    
 };
 
-#endif	// for header file
+#endif    // for header file

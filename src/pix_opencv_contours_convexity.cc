@@ -49,10 +49,10 @@ pix_opencv_contours_convexity :: pix_opencv_contours_convexity()
 /////////////////////////////////////////////////////////
 pix_opencv_contours_convexity :: ~pix_opencv_contours_convexity()
 { 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&rgb);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&rgb);
 }
 
 /////////////////////////////////////////////////////////
@@ -65,21 +65,21 @@ void pix_opencv_contours_convexity :: processRGBAImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!orig)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&rgb);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&rgb);
 
-	//create the orig image with new size
+    //create the orig image with new size
         orig = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
 
-    	// Create the output images with new sizes
-    	rgb = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 3);
+        // Create the output images with new sizes
+        rgb = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 3);
 
-    	gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
     
     }
     // Here we make a copy of the pixel data from image to orig->imageData
@@ -117,18 +117,18 @@ void pix_opencv_contours_convexity :: processRGBAImage(imageStruct &image)
     for( ; contours != 0; contours = contours->h_next )
         {
         CvRect rect;
-	int count = contours->total; 
-	rect = cvBoundingRect(contours, 1);
-	if  ( (rect.width*rect.height) > area ) 
-		{
-		selected = i;
-		area = rect.width*rect.height;
-		}
-	i++;
-	}
+    int count = contours->total; 
+    rect = cvBoundingRect(contours, 1);
+    if  ( (rect.width*rect.height) > area ) 
+        {
+        selected = i;
+        area = rect.width*rect.height;
+        }
+    i++;
+    }
 
     contours = first_contour;
-	
+    
     int k = 0;
     for( ; contours != 0; contours = contours->h_next )
         {
@@ -138,8 +138,8 @@ void pix_opencv_contours_convexity :: processRGBAImage(imageStruct &image)
         CvSize size;
         CvRect rect;
 
-	rect = cvBoundingRect( contours, 1);
-	if ( (k==selected) ) {
+    rect = cvBoundingRect( contours, 1);
+    if ( (k==selected) ) {
         
         
     //fprintf(stderr,"malloc\n");
@@ -172,7 +172,7 @@ void pix_opencv_contours_convexity :: processRGBAImage(imageStruct &image)
         for(;defects;defects = defects->h_next)
         {
             int nomdef = defects->total; // defect amount
-    	    outlet_float( m_nomdef, nomdef );
+            outlet_float( m_nomdef, nomdef );
             
             if(nomdef == 0)
                 continue;
@@ -193,7 +193,7 @@ void pix_opencv_contours_convexity :: processRGBAImage(imageStruct &image)
                 cvCircle( rgb, *(defectArray[i].depth_point), 5, CV_RGB(0,255,0), -1, 8,0);
                 cvCircle( rgb, *(defectArray[i].start), 5, CV_RGB(0,255,0), -1, 8,0);
                 cvLine(rgb, *(defectArray[i].depth_point), *(defectArray[i].end),CV_RGB(0,0,255),1, CV_AA, 0 );
-    	    t_atom rlist[7];
+            t_atom rlist[7];
             SETFLOAT(&rlist[0], i);
             SETFLOAT(&rlist[1], defectArray[i].start->x);
             SETFLOAT(&rlist[2], defectArray[i].start->y);
@@ -201,10 +201,10 @@ void pix_opencv_contours_convexity :: processRGBAImage(imageStruct &image)
             SETFLOAT(&rlist[4], defectArray[i].depth_point->y);
             SETFLOAT(&rlist[5], defectArray[i].end->x);
             SETFLOAT(&rlist[6], defectArray[i].end->y);
-    	    outlet_list( m_dataout, 0, 7, rlist );
+            outlet_list( m_dataout, 0, 7, rlist );
             }
 
-	    j++;
+        j++;
              
             // Free memory.       
             free(defectArray);
@@ -229,9 +229,9 @@ void pix_opencv_contours_convexity :: processRGBAImage(imageStruct &image)
         free(hull);
             /* replace CV_FILLED with 1 to see the outlines */
             //cvDrawContours( x->cnt_img, contours, CV_RGB(255,0,0), CV_RGB(0,255,0), x->levels, 3, CV_AA, cvPoint(0,0)  );
-	    //cvConvexityDefects( contours, cvConvexHull2( contours, 0, CV_CLOCKWISE, 0 ), stor022 );
+        //cvConvexityDefects( contours, cvConvexHull2( contours, 0, CV_CLOCKWISE, 0 ), stor022 );
         }
-	    k++;
+        k++;
         }
 
     cvReleaseMemStorage( &stor03 );
@@ -250,20 +250,20 @@ void pix_opencv_contours_convexity :: processRGBImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!rgb)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&rgb);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&rgb);
 
-	//create the orig image with new size
+    //create the orig image with new size
         rgb = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
 
-    	// Create the output images with new sizes
+        // Create the output images with new sizes
 
-    	gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
+        gray = cvCreateImage(cvSize(rgb->width,rgb->height), IPL_DEPTH_8U, 1);
     
     }
     // FEM UNA COPIA DEL PACKET A image->imageData ... http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html aqui veiem la estructura de IplImage
@@ -297,18 +297,18 @@ void pix_opencv_contours_convexity :: processRGBImage(imageStruct &image)
     for( ; contours != 0; contours = contours->h_next )
         {
         CvRect rect;
-	int count = contours->total; 
-	rect = cvBoundingRect(contours, 1);
-	if  ( (rect.width*rect.height) > area ) 
-		{
-		selected = i;
-		area = rect.width*rect.height;
-		}
-	i++;
-	}
+    int count = contours->total; 
+    rect = cvBoundingRect(contours, 1);
+    if  ( (rect.width*rect.height) > area ) 
+        {
+        selected = i;
+        area = rect.width*rect.height;
+        }
+    i++;
+    }
 
     contours = first_contour;
-	
+    
     int k = 0;
     for( ; contours != 0; contours = contours->h_next )
         {
@@ -318,8 +318,8 @@ void pix_opencv_contours_convexity :: processRGBImage(imageStruct &image)
         CvSize size;
         CvRect rect;
 
-	rect = cvBoundingRect( contours, 1);
-	if ( (k==selected) ) {
+    rect = cvBoundingRect( contours, 1);
+    if ( (k==selected) ) {
         
         
     //fprintf(stderr,"malloc\n");
@@ -353,7 +353,7 @@ void pix_opencv_contours_convexity :: processRGBImage(imageStruct &image)
         for(;defects;defects = defects->h_next)
         {
             int nomdef = defects->total; // defect amount
-    	    outlet_float( m_nomdef, nomdef );
+            outlet_float( m_nomdef, nomdef );
             
             if(nomdef == 0)
                 continue;
@@ -374,7 +374,7 @@ void pix_opencv_contours_convexity :: processRGBImage(imageStruct &image)
                 cvCircle( rgb, *(defectArray[i].depth_point), 5, CV_RGB(0,255,0), -1, 8,0);
                 cvCircle( rgb, *(defectArray[i].start), 5, CV_RGB(0,255,0), -1, 8,0);
                 cvLine(rgb, *(defectArray[i].depth_point), *(defectArray[i].end),CV_RGB(0,0,255),1, CV_AA, 0 );
-    	    t_atom rlist[7];
+            t_atom rlist[7];
             SETFLOAT(&rlist[0], i);
             SETFLOAT(&rlist[1], defectArray[i].start->x);
             SETFLOAT(&rlist[2], defectArray[i].start->y);
@@ -382,10 +382,10 @@ void pix_opencv_contours_convexity :: processRGBImage(imageStruct &image)
             SETFLOAT(&rlist[4], defectArray[i].depth_point->y);
             SETFLOAT(&rlist[5], defectArray[i].end->x);
             SETFLOAT(&rlist[6], defectArray[i].end->y);
-    	    outlet_list( m_dataout, 0, 7, rlist );
+            outlet_list( m_dataout, 0, 7, rlist );
             }
 
-	    j++;
+        j++;
              
             // Free memory.       
             free(defectArray);
@@ -396,7 +396,7 @@ void pix_opencv_contours_convexity :: processRGBImage(imageStruct &image)
         cvDrawContours( rgb, contours, CV_RGB(255,0,0), CV_RGB(0,255,0), 2, 2, CV_AA, cvPoint(0,0)  );
         
         // Draw convex hull for current contour.        
-	CvSeq* hull = seqhull->h_next;
+    CvSeq* hull = seqhull->h_next;
         for(; hull != NULL; hull=hull->h_next)
         {
             cvLine(rgb, PointArray[int(*hull->h_prev->ptr)], 
@@ -411,9 +411,9 @@ void pix_opencv_contours_convexity :: processRGBImage(imageStruct &image)
         free(hull);
             /* replace CV_FILLED with 1 to see the outlines */
             //cvDrawContours( x->cnt_img, contours, CV_RGB(255,0,0), CV_RGB(0,255,0), x->levels, 3, CV_AA, cvPoint(0,0)  );
-	    //cvConvexityDefects( contours, cvConvexHull2( contours, 0, CV_CLOCKWISE, 0 ), stor022 );
+        //cvConvexityDefects( contours, cvConvexHull2( contours, 0, CV_CLOCKWISE, 0 ), stor022 );
         }
-	    k++;
+        k++;
         }
 
     cvReleaseMemStorage( &stor03 );
@@ -429,27 +429,27 @@ void pix_opencv_contours_convexity :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_contours_convexity : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_contours_convexity :: processGrayImage(imageStruct &image)
 { 
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!orig)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&rgb);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&rgb);
 
-	//create the orig image with new size
+    //create the orig image with new size
         orig = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
 
-    	// Create the output images with new sizes
-    	rgb = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 3);
+        // Create the output images with new sizes
+        rgb = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 3);
 
-    	gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
     
     }
     // Here we make a copy of the pixel data from image to orig->imageData
@@ -484,18 +484,18 @@ void pix_opencv_contours_convexity :: processGrayImage(imageStruct &image)
     for( ; contours != 0; contours = contours->h_next )
         {
         CvRect rect;
-	int count = contours->total; 
-	rect = cvBoundingRect(contours, 1);
-	if  ( (rect.width*rect.height) > area ) 
-		{
-		selected = i;
-		area = rect.width*rect.height;
-		}
-	i++;
-	}
+    int count = contours->total; 
+    rect = cvBoundingRect(contours, 1);
+    if  ( (rect.width*rect.height) > area ) 
+        {
+        selected = i;
+        area = rect.width*rect.height;
+        }
+    i++;
+    }
 
     contours = first_contour;
-	
+    
     int k = 0;
     for( ; contours != 0; contours = contours->h_next )
         {
@@ -505,8 +505,8 @@ void pix_opencv_contours_convexity :: processGrayImage(imageStruct &image)
         CvSize size;
         CvRect rect;
 
-	rect = cvBoundingRect( contours, 1);
-	if ( (k==selected) ) {
+    rect = cvBoundingRect( contours, 1);
+    if ( (k==selected) ) {
         
         
     //fprintf(stderr,"malloc\n");
@@ -542,7 +542,7 @@ void pix_opencv_contours_convexity :: processGrayImage(imageStruct &image)
         for(;defects;defects = defects->h_next)
         {
             int nomdef = defects->total; // defect amount
-    	    outlet_float( m_nomdef, nomdef );
+            outlet_float( m_nomdef, nomdef );
             
             if(nomdef == 0)
                 continue;
@@ -563,7 +563,7 @@ void pix_opencv_contours_convexity :: processGrayImage(imageStruct &image)
                 cvCircle( rgb, *(defectArray[i].depth_point), 5, CV_RGB(0,255,0), -1, 8,0);
                 cvCircle( rgb, *(defectArray[i].start), 5, CV_RGB(0,255,0), -1, 8,0);
                 cvLine(rgb, *(defectArray[i].depth_point), *(defectArray[i].end),CV_RGB(0,0,255),1, CV_AA, 0 );
-    	    t_atom rlist[7];
+            t_atom rlist[7];
             SETFLOAT(&rlist[0], i);
             SETFLOAT(&rlist[1], defectArray[i].start->x);
             SETFLOAT(&rlist[2], defectArray[i].start->y);
@@ -571,10 +571,10 @@ void pix_opencv_contours_convexity :: processGrayImage(imageStruct &image)
             SETFLOAT(&rlist[4], defectArray[i].depth_point->y);
             SETFLOAT(&rlist[5], defectArray[i].end->x);
             SETFLOAT(&rlist[6], defectArray[i].end->y);
-    	    outlet_list( m_dataout, 0, 7, rlist );
+            outlet_list( m_dataout, 0, 7, rlist );
             }
 
-	    j++;
+        j++;
              
             // Free memory.       
             free(defectArray);
@@ -599,9 +599,9 @@ void pix_opencv_contours_convexity :: processGrayImage(imageStruct &image)
         free(hull);
             /* replace CV_FILLED with 1 to see the outlines */
             //cvDrawContours( x->cnt_img, contours, CV_RGB(255,0,0), CV_RGB(0,255,0), x->levels, 3, CV_AA, cvPoint(0,0)  );
-	    //cvConvexityDefects( contours, cvConvexHull2( contours, 0, CV_CLOCKWISE, 0 ), stor022 );
+        //cvConvexityDefects( contours, cvConvexHull2( contours, 0, CV_CLOCKWISE, 0 ), stor022 );
         }
-	    k++;
+        k++;
         }
 
     cvReleaseMemStorage( &stor03 );
@@ -635,9 +635,9 @@ void pix_opencv_contours_convexity :: floatMaxAreaMess (float maxarea)
 void pix_opencv_contours_convexity :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_contours_convexity::floatMinAreaMessCallback,
-  		  gensym("minarea"), A_FLOAT, A_NULL);
+            gensym("minarea"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_contours_convexity::floatMaxAreaMessCallback,
-  		  gensym("maxarea"), A_FLOAT, A_NULL);
+            gensym("maxarea"), A_FLOAT, A_NULL);
 }
 void pix_opencv_contours_convexity :: floatMaxAreaMessCallback(void *data, t_floatarg maxarea)
 {

@@ -12,6 +12,7 @@ pix_opencv_la_include_HEADERS = Blob.hpp \
 					pix_opencv_bgsubstract.h \
 					pix_opencv_backgroundsubtractor.h \
 					pix_opencv_camshift.h \
+					pix_opencv_findchessboardcorners.h \
 					pix_opencv_clahe.h \
 					pix_opencv_colorfilt.h \
 					pix_opencv_contours_boundingrect.h \
@@ -36,7 +37,10 @@ pix_opencv_la_include_HEADERS = Blob.hpp \
 					pix_opencv_template.h \
 					pix_opencv_threshold.h \
 					pix_opencv_trackKnn.h \
-					pix_opencv_warpperspective.h
+					pix_opencv_warpperspective.h \
+					pix_opencv_hist_compare.h \
+					pix_opencv_lk.h
+#					pix_opencv_knear.h
 
 OVERVIEW=../pix_opencv-help.pd
 
@@ -68,7 +72,11 @@ pix_opencv_la_SOURCES = pix_opencv_edge.cc \
 				  pix_opencv.cc \
 				  pix_opencv_surf.cc \
 				  pix_opencv_facetracker.cc \
-				  pix_opencv_calibration.cc
+				  pix_opencv_calibration.cc \
+				  pix_opencv_findchessboardcorners.cc \
+				  pix_opencv_hist_compare.cc \
+				  pix_opencv_lk.cc
+#				  pix_opencv_knear.cc
 
 
 #~ Override pix_opencv.la target to add ".WAIT" but it doesn't seems to work...
@@ -99,8 +107,7 @@ clean-local:: clean-conveniencelink
 help:
 	echo "#N canvas 147 197 1566 537 10;" > $(OVERVIEW)
 	echo "#X text 126 15 overview of all available pix_opencv objects;" >> $(OVERVIEW)
-	echo "#X obj 30 20 pix_opencv;" >> $(OVERVIEW)
 	ID=0 ; \
 	for extern in $(pix_opencv_la_SOURCES:.cc=""); do \
-		echo "#X obj `expr $$ID % 5 \* 300 + 50` `expr $$ID / 5 \* 30 + 40` $$extern;" >> $(OVERVIEW) && ID=`expr $$ID + 1` ; \
+		echo "#X obj `expr $$ID % 8 \* 300 + 50` `expr $$ID / 8 \* 30 + 40` $$extern;" >> $(OVERVIEW) && ID=`expr $$ID + 1` ; \
 	done ;

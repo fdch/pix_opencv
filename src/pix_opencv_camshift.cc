@@ -253,7 +253,7 @@ void pix_opencv_camshift :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_camshift : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_camshift :: processGrayImage(imageStruct &image)
 { 
   int i, k;
@@ -346,19 +346,19 @@ void pix_opencv_camshift :: processGrayImage(imageStruct &image)
 void pix_opencv_camshift :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_camshift::backProjectMessCallback,
-		  gensym("backproject"), A_FLOAT, A_NULL);
+          gensym("backproject"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_camshift::vMinMessCallback,
-		  gensym("vmin"), A_FLOAT, A_NULL);
+          gensym("vmin"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_camshift::vMaxMessCallback,
-		  gensym("vmax"), A_FLOAT, A_NULL);
+          gensym("vmax"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_camshift::sMinMessCallback,
-		  gensym("smin"), A_NULL);
+          gensym("smin"), A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_camshift::trackMessCallback,
-		  gensym("track"), A_FLOAT, A_FLOAT, A_NULL);
+          gensym("track"), A_FLOAT, A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_camshift::rWidthMessCallback,
-		  gensym("rwidth"), A_FLOAT, A_NULL);
+          gensym("rwidth"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_camshift::rHeightMessCallback,
-		  gensym("rheight"), A_NULL);
+          gensym("rheight"), A_NULL);
 }
 
 void  pix_opencv_camshift :: backProjectMessCallback(void *data, t_floatarg backproject)

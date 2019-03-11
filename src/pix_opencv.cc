@@ -32,7 +32,7 @@ void pix_opencv_setup(void)
     verbose(-1,"\tand without FaceTracker.");
 #endif
     pix_opencv_class = class_new(gensym("pix_opencv"), (t_newmethod)pix_opencv_new, 0,
-    	sizeof(t_pix_opencv), 0, (t_atomtype) 0);
+        sizeof(t_pix_opencv), 0, (t_atomtype) 0);
 }
 
 } // extern "C"

@@ -179,7 +179,7 @@ void pix_opencv_hough_circles :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_hough_circles : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_hough_circles :: processGrayImage(imageStruct &image)
 { 
   int i, ucircles;

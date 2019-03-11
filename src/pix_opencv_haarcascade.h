@@ -48,41 +48,41 @@ class GEM_EXPORT pix_opencv_haarcascade : public GemPixObj
 
     public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_haarcascade();
-    	
+        //////////
+        // Constructor
+        pix_opencv_haarcascade();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_haarcascade();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_haarcascade();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
-    	
-	//////////
-    	// Set the new edge threshold
-    	void	    	scaleFactorMess(float scale_factor);
-    	void	    	minNeighborsMess(float min_neighbors);
-    	void	    	modeMess(float mode);
-    	void	    	minSizeMess(float min_size);
-	void 		loadCascadeMess(t_symbol *filename);
-    	void	    	fToleranceMess(float ftolerance);
-	void 		clearMess(void);
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
+        
+    //////////
+        // Set the new edge threshold
+        void            scaleFactorMess(float scale_factor);
+        void            minNeighborsMess(float min_neighbors);
+        void            modeMess(float mode);
+        void            minSizeMess(float min_size);
+    void         loadCascadeMess(t_symbol *filename);
+        void            fToleranceMess(float ftolerance);
+    void         clearMess(void);
         int             mark(float fx, float fy );
-    	// The parameters for cvHaarDetectObjects function
-	float 		scale_factor;
-	int 		min_neighbors;
-	int		mode;
-	int		min_size;
-	// to detect changes in the image size
-	int 		comp_xsize;
-	int		comp_ysize;
+        // The parameters for cvHaarDetectObjects function
+    float         scale_factor;
+    int         min_neighbors;
+    int        mode;
+    int        min_size;
+    // to detect changes in the image size
+    int         comp_xsize;
+    int        comp_ysize;
         t_atom          rlist[4];
         // marked objects history
         int x_xmark[MAX_MARKERS];
@@ -92,24 +92,24 @@ class GEM_EXPORT pix_opencv_haarcascade : public GemPixObj
 
     private:
     
-    	//////////
-    	// Static member functions
-    	static void 	scaleFactorMessCallback(void *data, t_floatarg scale_factor);
-    	static void	minNeighborsMessCallback(void *data, float min_neighbors);
-    	static void	modeMessCallback(void *data, float mode);
-    	static void	minSizeMessCallback(void *data, float min_size);
-    	static void 	loadCascadeMessCallback(void *data, t_symbol* filename);
-    	static void	fToleranceMessCallback(void *data, float ftolerance);
-    	static void	clearMessCallback(void *data);
+        //////////
+        // Static member functions
+        static void     scaleFactorMessCallback(void *data, t_floatarg scale_factor);
+        static void    minNeighborsMessCallback(void *data, float min_neighbors);
+        static void    modeMessCallback(void *data, float mode);
+        static void    minSizeMessCallback(void *data, float min_size);
+        static void     loadCascadeMessCallback(void *data, t_symbol* filename);
+        static void    fToleranceMessCallback(void *data, float ftolerance);
+        static void    clearMessCallback(void *data);
 
-	CvHaarClassifierCascade* cascade;
+    CvHaarClassifierCascade* cascade;
         CvFont font;
-	/////////
-	// IplImage needed
-    	IplImage 	*rgba, *frame, *grey;
-	
-	t_outlet 	*m_numout;
-	t_outlet 	*m_dataout;
+    /////////
+    // IplImage needed
+        IplImage     *rgba, *frame, *grey;
+    
+    t_outlet     *m_numout;
+    t_outlet     *m_dataout;
 };
 
-#endif	// for header file
+#endif    // for header file

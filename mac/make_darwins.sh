@@ -1,12 +1,12 @@
 #!/bin/bash
 #
-#	Script to make .pd_darwins and place them in ~/Documents/Pd/externals
-#	questions to: fdch.github.io
+#    Script to make .pd_darwins and place them in ~/Documents/Pd/externals
+#    questions to: fdch.github.io
 #
-#	Usage: 
-#		You need to install pix_opencv [optionally Facetracker] first:
-#		$ cd pix_opencv
-#		$ sh mac/make_darwin.sh
+#    Usage: 
+#        You need to install pix_opencv [optionally Facetracker] first:
+#        $ cd pix_opencv
+#        $ sh mac/make_darwin.sh
 #
 
 ROOT=$(pwd)
@@ -16,7 +16,7 @@ TARGET=pix_opencv
 TARGET_PATH=~/Library/Pd/externals
 TARGET_DIR=$TARGET_PATH/$TARGET
 
-#	Where .o reside
+#    Where .o reside
 LIBDIR=$SRCDIR/.libs
 FTLIB=$ROOT/Facetracker/src/lib
 
@@ -26,122 +26,121 @@ EXTENSION=pd_darwin
 
 LIBS=" -ldl -lz -lpthread -g -O2 "
 
-#	Dependencies
+#    Dependencies
 DEPS=(
-		pd
-		Gem
-		opencv
+        pd
+        Gem
+        opencv
 )
 
 
-#	Array to store .o names / basenames
+#    Array to store .o names / basenames
 BINARY=()
 FTOBJ=''
 
 FACETRACKER_INSTRUCTIONS="\
 To compile Facetraker, do this:
-	$ cd $TARGET 
-	$ git submodule init
-	$ git submodule update
-	$ cd Facetracker
-	$ make
+    $ cd $TARGET 
+    $ git submodule init
+    $ git submodule update
+    $ cd Facetracker
+    $ make
 Otherwise, it will be skipped."
 
 
 function get_dependencies()
 {
-	for i in ${DEPS[@]}
-	do
-		LIBS+=" `pkg-config --libs $i`"
-	done
+    for i in ${DEPS[@]}
+    do
+        LIBS+=" `pkg-config --libs $i`"
+    done
 }
 
 function make_target_dir()
 {
-	if [[ ! -d $TARGET_DIR ]]
-	then
-		echo "Creating $TARGET_DIR to place binaries..."
-		mkdir $TARGET_DIR || echo "... could not create. Exiting." && exit
-	fi
+    if [[ ! -d $TARGET_DIR ]]
+    then
+        echo "Creating $TARGET_DIR to place binaries..."
+        mkdir $TARGET_DIR || echo "... could not create. Exiting." && exit
+    fi
 }
 
 function get_objects()
 {
-	local cnt=0
-	cd $SRCDIR
-	for i in *.o
-	do
-		if [[ -f $i ]]
-		then
-			if [[ "${TARGET}.o" != "$i" ]]
-			then
-				BINARY[$cnt]="`basename $i .o | cut -f2 -d- `.${EXTENSION}"
-				((cnt++))
-				BINARY[$cnt]="$i"
-				((cnt++))
-			fi
-		fi
-	done
-	cd $ROOT
-	if [[ ! -d $FTLIB ]]
-	then
-		echo "Facetracker was not initialized"
-		echo "$FACETRACKER_INSTRUCTIONS"
-	else
-		for i in $FTLIB/*.o
-		do
-			if [[ -f $i ]]
-			then
-				FTOBJ+=" $i"
-			else
-				echo "Skiping: $i"
-			fi
-		done
-	fi
+    local cnt=0
+    cd $SRCDIR
+    for i in *.o
+    do
+        if [[ -f $i ]]
+        then
+            if [[ "${TARGET}.o" != "$i" ]]
+            then
+                BINARY[$cnt]="`basename $i .o | cut -f2 -d- `.${EXTENSION}"
+                ((cnt++))
+                BINARY[$cnt]="$i"
+                ((cnt++))
+            fi
+        fi
+    done
+    cd $ROOT
+    if [[ ! -d $FTLIB ]]
+    then
+        echo "Facetracker was not initialized"
+        echo "$FACETRACKER_INSTRUCTIONS"
+    else
+        for i in $FTLIB/*.o
+        do
+            if [[ -f $i ]]
+            then
+                FTOBJ+=" $i"
+            else
+                echo "Skiping: $i"
+            fi
+        done
+    fi
 }
 
 function check_multiple_compilation()
 {
-	local i
+    local i
 
-	for ((i=0; i<${#BINARY[@]}; i+=2))
-	do
-		n=$((i+1))
-		echo "$CXX -o ${BINARY[$i]} ${BINARY[$n]} $FTOBJ $LIBS"
-	done
+    for ((i=0; i<${#BINARY[@]}; i+=2))
+    do
+        n=$((i+1))
+        echo "$CXX -o ${BINARY[$i]} ${BINARY[$n]} $FTOBJ $LIBS"
+    done
 
 }
 
 function check_single_compilation()
 {
-	local i
-	local obj=""
+    local i
+    local obj=""
 
-	for ((i=0; i<${#BINARY[@]}; i+=2))
-	do
-		obj+=" $LIBDIR/${BINARY[$((i+1))]}"
-	done
+    for ((i=0; i<${#BINARY[@]}; i+=2))
+    do
+        obj+=" $LIBDIR/${BINARY[$((i+1))]}"
+    done
 
-	echo "$CXX -o $TARGET.${EXTENSION} $obj $FTOBJ $LIBS"
+    echo "$CXX -o $TARGET.${EXTENSION} $obj $FTOBJ $LIBS"
 
 }
 
 function make_binaries()
 {
-	local i
-	cd $SRCDIR
-	for ((i=0; i<${#BINARY[@]}; i+=2))
-	do
-		n=$((i+1))
-		echo "$CXX -o ${BINARY[$i]} ${BINARY[$n]} $FTOBJ $LIBS"
-		$CXX -o ${BINARY[$i]} ${BINARY[$n]} $LIBS
-	done
-	cd $ROOT
+    local i
+    cd $SRCDIR
+    for ((i=0; i<${#BINARY[@]}; i+=2))
+    do
+        n=$((i+1))
+        echo "$CXX -o ${BINARY[$i]} ${BINARY[$n]} $FTOBJ $LIBS"
+        $CXX -o ${BINARY[$i]} ${BINARY[$n]} $LIBS
+    done
+    cd $ROOT
 }
 
-#	this is harcoded from the libtool compile instruction when running make
+#    this is harcoded from the libtool compile instruction when running make
 HEADERS=" \
-CPPFLAGS=-std=c++11 \
 -DPACKAGE_NAME=\"$TARGET\" \
 -DPACKAGE_TARNAME=\"$TARGET\" \
 -DPACKAGE_VERSION=\"0.4\" \
@@ -169,113 +168,113 @@ CPPFLAGS=-std=c++11 \
 
 function make_one()
 {
-	local src=`basename "$1" .o`
-	local obj=pix_opencv_la-$src.o
-	local tar=$src.pd_darwin
+    local src=`basename "$1" .o`
+    local obj=pix_opencv_la-$src.o
+    local tar=$src.pd_darwin
 
-	local libs=`pkg-config --cflags {pd,Gem}`
+    local libs=`pkg-config --cflags {pd,Gem}`
 
-	cd $SRCDIR
-	if [[ ! -f "$src.cc" ]]
-	then
-		echo "$src.cc does not exist. Exiting."
-	else
-		if [[ ! $2 ]] || [[ "$2" == "-c" ]]
-		then
-		echo "Compiling $src ..."
-		echo "$CXX $HEADERS $libs -g -O2 -MT $obj -MD -MP -MF .deps/$src.Tpo -c $src.cc -fno-common -DPIC -o $obj "
-		$CXX $HEADERS $libs -g -O2 -MT $obj -MD -MP -MF .deps/$src.Tpo -c $src.cc -fno-common -DPIC -o $obj
-		fi
-		if [[ ! $2 ]] || [[ "$2" == "-l" ]]
-		then
-			echo "Linking $src ..."
-			echo "$CXX -o $tar $obj $FTOBJ $LIBS"
-			$CXX -o $tar $obj $LIBS
-		fi
-		if [[ ! $2 ]] || [[ "$2" == "-i" ]]
-		then
-			echo "Installing $src ..."
-			rsync -aP $tar $TARGET_DIR
-		fi
-	fi
-	cd $ROOT
+    cd $SRCDIR
+    if [[ ! -f "$src.cc" ]]
+    then
+        echo "$src.cc does not exist. Exiting."
+    else
+        if [[ ! $2 ]] || [[ "$2" == "-c" ]]
+        then
+        echo "Compiling $src ..."
+        echo "$CXX $HEADERS CPPFLAGS=-std=c++11 $libs -g -O2 -MT $obj -MD -MP -MF .deps/$src.Tpo -c $src.cc -fno-common -DPIC -o $obj "
+        $CXX CPPFLAGS=-std=c++11 $HEADERS $libs  -g -O2 -MT $obj -MD -MP -MF .deps/$src.Tpo -c $src.cc -fno-common -DPIC -o $obj
+        fi
+        if [[ ! $2 ]] || [[ "$2" == "-l" ]]
+        then
+            echo "Linking $src ..."
+            echo "$CXX -o $tar $obj $FTOBJ $LIBS"
+            $CXX -o $tar $obj $LIBS
+        fi
+        if [[ ! $2 ]] || [[ "$2" == "-i" ]]
+        then
+            echo "Installing $src ..."
+            rsync -aP $tar $TARGET_DIR
+        fi
+    fi
+    cd $ROOT
 }
 
 function make_single_binary()
 {
-	local i
-	local obj=""
+    local i
+    local obj=""
 
-	for ((i=0; i<${#BINARY[@]}; i+=2))
-	do
-		obj+=" $LIBDIR/${BINARY[$((i+1))]}"
-	done
+    for ((i=0; i<${#BINARY[@]}; i+=2))
+    do
+        obj+=" $LIBDIR/${BINARY[$((i+1))]}"
+    done
 
-	cd $SRCDIR
-	echo "$CXX -o $TARGET.${EXTENSION} $obj $FTOBJ $LIBS"
-	$CXX -o $TARGET.${EXTENSION} $obj $LIBS
-	cd $ROOT
+    cd $SRCDIR
+    echo "$CXX -o $TARGET.${EXTENSION} $obj $FTOBJ $LIBS"
+    $CXX -o $TARGET.${EXTENSION} $obj $LIBS
+    cd $ROOT
 }
 
 function check_firstone()
 {
-	# try with only one
-	cd $SRCDIR
-	echo "$CXX -o ${BINARY[2]} ${BINARY[3]} $FTOBJ $LIBS"
-	$CXX -o ${BINARY[2]} ${BINARY[3]} $FTOBJ $LIBS
-	cd $ROOT
+    # try with only one
+    cd $SRCDIR
+    echo "$CXX -o ${BINARY[2]} ${BINARY[3]} $FTOBJ $LIBS"
+    $CXX -o ${BINARY[2]} ${BINARY[3]} $FTOBJ $LIBS
+    cd $ROOT
 }
 
 function link_lib()
 {
-	echo "Linking the following files to $TARGET_DIR:"
-	for i in $SRCDIR/*.${EXTENSION}
-	do
-		if [[ ! -f $i ]]
-		then
-			echo "$i not found, there was a problem"
-		else
-			if [[ ! -f $TARGET_DIR/$i ]]
-			then
-				basename "$i"
-				ln -f "$i" $TARGET_DIR
-			fi
-		fi
-	done
+    echo "Linking the following files to $TARGET_DIR:"
+    for i in $SRCDIR/*.${EXTENSION}
+    do
+        if [[ ! -f $i ]]
+        then
+            echo "$i not found, there was a problem"
+        else
+            if [[ ! -f $TARGET_DIR/$i ]]
+            then
+                basename "$i"
+                ln -f "$i" $TARGET_DIR
+            fi
+        fi
+    done
 }
 
 if [ `uname` != "Darwin" ]
 then
-	echo "Only for macos. Exiting."
-	exit 1
+    echo "Only for macos. Exiting."
+    exit 1
 elif [[ ! -d $LIBDIR ]]
 then
-	echo "You need to compile $TARGET first, as in:
-	$ cd $TARGET
-	$ sh autogen.sh
-	$ sh configure --with-pd=/usr/local/include/pd --with-gem=/usr/local/include/Gem
-	$ make
-	$ make install libdir=$TARGET_PATH"
-	echo "Optionally, you can install Facetracker before compiling $TARGET."
-	echo "$FACETRACKER_INSTRUCTIONS"
-	exit 1
+    echo "You need to compile $TARGET first, as in:
+    $ cd $TARGET
+    $ sh autogen.sh
+    $ sh configure --with-pd=/usr/local/include/pd --with-gem=/usr/local/include/Gem
+    $ make
+    $ make install libdir=$TARGET_PATH"
+    echo "Optionally, you can install Facetracker before compiling $TARGET."
+    echo "$FACETRACKER_INSTRUCTIONS"
+    exit 1
 else
-	get_dependencies
-	make_target_dir
-	if [[ $@ ]]
-	then
-		echo "making $1"
-		make_one "${@}"
-		exit
-	else
-		get_objects
-		make_binaries
-		# link_lib
-		#	Copy missing helpfile to target dir
-		#	Copy <model> directory to target dir (for Facetracker)
-		#	Copy all darwins to target dir
-		rsync -aP $ROOT/${TARGET}-help.pd $ROOT/model $SRCDIR/*.pd_darwin $TARGET_DIR
-		echo "Try running the following:
-		$ pd -lib Gem:pix_opencv -open $TARGET_DIR/${TARGET}-help.pd"
-	fi
+    get_dependencies
+    make_target_dir
+    if [[ $@ ]]
+    then
+        echo "making $1"
+        make_one "${@}"
+        exit
+    else
+        get_objects
+        make_binaries
+        # link_lib
+        #    Copy missing helpfile to target dir
+        #    Copy <model> directory to target dir (for Facetracker)
+        #    Copy all darwins to target dir
+        rsync -aP $ROOT/${TARGET}-help.pd $ROOT/model $SRCDIR/*.pd_darwin $TARGET_DIR
+        echo "Try running the following:
+        $ pd -lib Gem:pix_opencv -open $TARGET_DIR/${TARGET}-help.pd"
+    fi
 fi

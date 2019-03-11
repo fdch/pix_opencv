@@ -41,49 +41,49 @@ class GEM_EXPORT pix_opencv_threshold : public GemPixObj
 
     public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_threshold();
-    	
+        //////////
+        // Constructor
+        pix_opencv_threshold();
+        
     protected:
-    	
-    	//////////
-    	// Destructor
-    	virtual ~pix_opencv_threshold();
+        
+        //////////
+        // Destructor
+        virtual ~pix_opencv_threshold();
 
-    	//////////
-    	// Do the processing
-    	virtual void 	processRGBAImage(imageStruct &image);
-    	virtual void 	processRGBImage(imageStruct &image);
-	virtual void 	processYUVImage(imageStruct &image);
-    	virtual void 	processGrayImage(imageStruct &image); 
-    	
-	//////////
-    	// Set the new edge threshold
-    	void	    	floatMaxMess(float maxvalue);
-    	void	    	floatThreshMess(float edge_thresh);
-    	void	    	floatModeMess(float mode);
+        //////////
+        // Do the processing
+        virtual void     processRGBAImage(imageStruct &image);
+        virtual void     processRGBImage(imageStruct &image);
+    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processGrayImage(imageStruct &image); 
+        
+    //////////
+        // Set the new edge threshold
+        void            floatMaxMess(float maxvalue);
+        void            floatThreshMess(float edge_thresh);
+        void            floatModeMess(float mode);
 
-    	// The new edge threshold
-	float 		threshold_value;
-    	float       	max_value;
-    	int 		threshold_mode;
+        // The new edge threshold
+    float         threshold_value;
+        float           max_value;
+        int         threshold_mode;
 
-	// to detect changes in the image size
-	int 		comp_xsize;
-	int		comp_ysize;
+    // to detect changes in the image size
+    int         comp_xsize;
+    int        comp_ysize;
 
     private:
     
-    	//////////
-    	// Static member functions
-    	static void 	floatMaxMessCallback(void *data, t_floatarg maxvalue);
-    	static void 	floatThreshMessCallback(void *data, t_floatarg thresh_value);
-    	static void 	floatModeMessCallback(void *data, t_floatarg thresh_mode_value);
+        //////////
+        // Static member functions
+        static void     floatMaxMessCallback(void *data, t_floatarg maxvalue);
+        static void     floatThreshMessCallback(void *data, t_floatarg thresh_value);
+        static void     floatModeMessCallback(void *data, t_floatarg thresh_mode_value);
 
-	/////////
-	// IplImage needed
-    	IplImage 	*orig, *rgb, *gray;
+    /////////
+    // IplImage needed
+        IplImage     *orig, *rgb, *gray;
 };
 
-#endif	// for header file
+#endif    // for header file

@@ -36,7 +36,7 @@ pix_opencv_bgsubstract :: pix_opencv_bgsubstract()
   comp_ysize  = 0;
   orig      = NULL;
   gray      = NULL;
-  rgb  	    = NULL;
+  rgb          = NULL;
   grayLow   = NULL;
   grayUp    = NULL;
   prev_gray = NULL;
@@ -49,14 +49,14 @@ pix_opencv_bgsubstract :: pix_opencv_bgsubstract()
 /////////////////////////////////////////////////////////
 pix_opencv_bgsubstract :: ~pix_opencv_bgsubstract()
 { 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&rgb);
-    	cvReleaseImage(&prev_gray);
-    	cvReleaseImage(&grayLow);
-    	cvReleaseImage(&grayUp);
-    	cvReleaseImage(&diff_8U);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&rgb);
+        cvReleaseImage(&prev_gray);
+        cvReleaseImage(&grayLow);
+        cvReleaseImage(&grayUp);
+        cvReleaseImage(&diff_8U);
 }
 
 /////////////////////////////////////////////////////////
@@ -68,28 +68,28 @@ void pix_opencv_bgsubstract :: processRGBAImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!orig)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&rgb);
-    	cvReleaseImage(&prev_gray);
-    	cvReleaseImage(&grayLow);
-    	cvReleaseImage(&grayUp);
-    	cvReleaseImage(&diff_8U);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&rgb);
+        cvReleaseImage(&prev_gray);
+        cvReleaseImage(&grayLow);
+        cvReleaseImage(&grayUp);
+        cvReleaseImage(&diff_8U);
 
-	//create the orig image with new size
+    //create the orig image with new size
         orig = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
         rgb  = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
 
-    	// Create the output images with new sizes
-    	gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
-    	grayLow = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
-    	grayUp = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
-    	prev_gray = cvCreateImage(cvSize(orig->width,orig->height), 8, 1);
-    	diff_8U = cvCreateImage(cvSize(orig->width,orig->height), 8, 1);
+        // Create the output images with new sizes
+        gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        grayLow = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        grayUp = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        prev_gray = cvCreateImage(cvSize(orig->width,orig->height), 8, 1);
+        diff_8U = cvCreateImage(cvSize(orig->width,orig->height), 8, 1);
     }
     // Here we make a copy of the pixel data from image to orig->imageData
     // orig is a IplImage struct, the default image type in openCV, take a look on the IplImage data structure here
@@ -100,8 +100,8 @@ void pix_opencv_bgsubstract :: processRGBAImage(imageStruct &image)
     cvCvtColor(orig, gray, CV_BGRA2GRAY);
 
     if (x_set) {
-    	memcpy( prev_gray->imageData, gray->imageData, image.xsize*image.ysize );
-	x_set=0;
+        memcpy( prev_gray->imageData, gray->imageData, image.xsize*image.ysize );
+    x_set=0;
     } 
 
     cvSubS (prev_gray,cvScalar(x_threshold,x_threshold,x_threshold,x_threshold),grayLow,NULL);
@@ -121,28 +121,28 @@ void pix_opencv_bgsubstract :: processRGBImage(imageStruct &image)
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!orig)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&rgb);
-    	cvReleaseImage(&prev_gray);
-    	cvReleaseImage(&grayLow);
-    	cvReleaseImage(&grayUp);
-    	cvReleaseImage(&diff_8U);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&rgb);
+        cvReleaseImage(&prev_gray);
+        cvReleaseImage(&grayLow);
+        cvReleaseImage(&grayUp);
+        cvReleaseImage(&diff_8U);
 
-	//create the orig image with new size
+    //create the orig image with new size
         orig = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
         rgb  = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
 
-    	// Create the output images with new sizes
-    	gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
-    	grayLow = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
-    	grayUp = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
-    	prev_gray = cvCreateImage(cvSize(orig->width,orig->height), 8, 1);
-    	diff_8U = cvCreateImage(cvSize(orig->width,orig->height), 8, 1);
+        // Create the output images with new sizes
+        gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        grayLow = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        grayUp = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        prev_gray = cvCreateImage(cvSize(orig->width,orig->height), 8, 1);
+        diff_8U = cvCreateImage(cvSize(orig->width,orig->height), 8, 1);
     }
     // Here we make a copy of the pixel data from image to orig->imageData
     // orig is a IplImage struct, the default image type in openCV, take a look on the IplImage data structure here
@@ -153,8 +153,8 @@ void pix_opencv_bgsubstract :: processRGBImage(imageStruct &image)
     cvCvtColor(rgb, gray, CV_BGRA2GRAY);
 
     if (x_set) {
-    	memcpy( prev_gray->imageData, gray->imageData, image.xsize*image.ysize );
-	x_set=0;
+        memcpy( prev_gray->imageData, gray->imageData, image.xsize*image.ysize );
+    x_set=0;
     } 
 
     cvSubS (prev_gray,cvScalar(x_threshold,x_threshold,x_threshold,x_threshold),grayLow,NULL);
@@ -174,34 +174,34 @@ void pix_opencv_bgsubstract :: processYUVImage(imageStruct &image)
 {
   post( "pix_opencv_bgsubstract : yuv format not supported" );
 }
-    	
+        
 void pix_opencv_bgsubstract :: processGrayImage(imageStruct &image)
 { 
 
   if ((this->comp_xsize!=image.xsize)||(this->comp_ysize!=image.ysize)||(!orig)) {
 
-	this->comp_xsize = image.xsize;
-	this->comp_ysize = image.ysize;
+    this->comp_xsize = image.xsize;
+    this->comp_ysize = image.ysize;
 
-    	//Destroy cv_images to clean memory
-	cvReleaseImage(&orig);
-    	cvReleaseImage(&gray);
-    	cvReleaseImage(&rgb);
-    	cvReleaseImage(&prev_gray);
-    	cvReleaseImage(&grayLow);
-    	cvReleaseImage(&grayUp);
-    	cvReleaseImage(&diff_8U);
+        //Destroy cv_images to clean memory
+    cvReleaseImage(&orig);
+        cvReleaseImage(&gray);
+        cvReleaseImage(&rgb);
+        cvReleaseImage(&prev_gray);
+        cvReleaseImage(&grayLow);
+        cvReleaseImage(&grayUp);
+        cvReleaseImage(&diff_8U);
 
-	//create the orig image with new size
+    //create the orig image with new size
         orig = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 4);
         rgb  = cvCreateImage(cvSize(image.xsize,image.ysize), IPL_DEPTH_8U, 3);
 
-    	// Create the output images with new sizes
-    	gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
-    	grayLow = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
-    	grayUp = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
-    	prev_gray = cvCreateImage(cvSize(orig->width,orig->height), 8, 1);
-    	diff_8U = cvCreateImage(cvSize(orig->width,orig->height), 8, 1);
+        // Create the output images with new sizes
+        gray = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        grayLow = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        grayUp = cvCreateImage(cvSize(orig->width,orig->height), IPL_DEPTH_8U, 1);
+        prev_gray = cvCreateImage(cvSize(orig->width,orig->height), 8, 1);
+        diff_8U = cvCreateImage(cvSize(orig->width,orig->height), 8, 1);
     }
     // Here we make a copy of the pixel data from image to orig->imageData
     // orig is a IplImage struct, the default image type in openCV, take a look on the IplImage data structure here
@@ -210,8 +210,8 @@ void pix_opencv_bgsubstract :: processGrayImage(imageStruct &image)
     
 
     if (x_set) {
-    	memcpy( prev_gray->imageData, gray->imageData, image.xsize*image.ysize );
-	x_set=0;
+        memcpy( prev_gray->imageData, gray->imageData, image.xsize*image.ysize );
+    x_set=0;
     } 
 
     cvSubS (prev_gray,cvScalar(x_threshold,x_threshold,x_threshold,x_threshold),grayLow,NULL);
@@ -244,9 +244,9 @@ void pix_opencv_bgsubstract :: SetMess ()
 void pix_opencv_bgsubstract :: obj_setupCallback(t_class *classPtr)
 {
   class_addmethod(classPtr, (t_method)&pix_opencv_bgsubstract::floatTreshMessCallback,
-  		  gensym("ft1"), A_FLOAT, A_NULL);
+            gensym("ft1"), A_FLOAT, A_NULL);
   class_addmethod(classPtr, (t_method)&pix_opencv_bgsubstract::SetMessCallback,
-  		  gensym("set"), A_NULL);
+            gensym("set"), A_NULL);
 }
 void pix_opencv_bgsubstract :: floatTreshMessCallback(void *data, t_floatarg x_threshold)
 {

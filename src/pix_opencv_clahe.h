@@ -34,7 +34,7 @@ using namespace cv;
 -------------------------------------------------------------------
 CLASS
     pix_opencv_clahe
-    	
+        
 KEYWORDS
     pix
     
@@ -47,23 +47,23 @@ class GEM_EXPORT pix_opencv_clahe : public GemPixObj
 
   public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_clahe(t_float clipLimit, int width, int height);
-    	
+        //////////
+        // Constructor
+        pix_opencv_clahe(t_float clipLimit, int width, int height);
+        
       /////////
       // Message handler
       void clipLimitMess(float);
       void tileGridSizeMess(int,int);
   protected:
-    	
-   	//////////
-   	// Destructor
-   	virtual ~pix_opencv_clahe();
+        
+       //////////
+       // Destructor
+       virtual ~pix_opencv_clahe();
 
-   	//////////
-   	// Do the processing
-   	virtual void 	processImage(imageStruct &image);
+       //////////
+       // Do the processing
+       virtual void     processImage(imageStruct &image);
     virtual void  startRendering();
     virtual void  stopRendering();
   
@@ -81,4 +81,4 @@ class GEM_EXPORT pix_opencv_clahe : public GemPixObj
     cv::Size m_tileGridSize;
     bool m_rendering;
 };
-#endif	// for header file
+#endif    // for header file

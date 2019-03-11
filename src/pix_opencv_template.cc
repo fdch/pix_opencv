@@ -48,10 +48,10 @@ pix_opencv_template :: ~pix_opencv_template()
 /////////////////////////////////////////////////////////
 // processImage
 //
-///////////////////////////////////////////////////////// 	
+/////////////////////////////////////////////////////////     
 void pix_opencv_template :: processImage(imageStruct &image)
 { 
-	cv::Mat imgMat( image.ysize, image.xsize, CV_8UC1, image.data, image.csize*image.xsize); // just transform imageStruct to IplImage without copying data
+    cv::Mat imgMat( image.ysize, image.xsize, CV_8UC1, image.data, image.csize*image.xsize); // just transform imageStruct to IplImage without copying data
 }
 
 /////////////////////////////////////////////////////////

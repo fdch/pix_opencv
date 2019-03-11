@@ -25,8 +25,8 @@ LOG
 CLASS
     pix_opencv_template
     
-	square pattern detector
-	
+    square pattern detector
+    
 KEYWORDS
     pix
     
@@ -39,19 +39,19 @@ class GEM_EXPORT pix_opencv_template : public GemPixObj
 
     public:
 
-	    //////////
-	    // Constructor
-    	pix_opencv_template();
-    	
+        //////////
+        // Constructor
+        pix_opencv_template();
+        
     protected:
-    	
-   	//////////
-   	// Destructor
-   	virtual ~pix_opencv_template();
+        
+       //////////
+       // Destructor
+       virtual ~pix_opencv_template();
 
-   	//////////
-   	// Do the processing
-   	virtual void 	processImage(imageStruct &image);
-    	    
+       //////////
+       // Do the processing
+       virtual void     processImage(imageStruct &image);
+            
 };
-#endif	// for header file
+#endif    // for header file
