@@ -105,9 +105,9 @@ clean-local:: clean-conveniencelink
 	$(CXX) $(ALL_CFLAGS) -o "$*.o" -c "$*.cc"
 
 help:
-	echo "#N canvas 147 197 1566 537 10;" > $(OVERVIEW)
-	echo "#X text 126 15 overview of all available pix_opencv objects;" >> $(OVERVIEW)
+	echo "#N canvas 100 100 950 500 12;" > $(OVERVIEW)
+	echo "#X text 300 15 overview of all available pix_opencv objects;" >> $(OVERVIEW)
 	ID=0 ; \
 	for extern in $(pix_opencv_la_SOURCES:.cc=""); do \
-		echo "#X obj `expr $$ID % 8 \* 300 + 50` `expr $$ID / 8 \* 30 + 40` $$extern;" >> $(OVERVIEW) && ID=`expr $$ID + 1` ; \
+		echo "#X obj `expr $$ID % 3 \* 300 + 50` `expr $$ID / 3 \* 30 + 60` $$extern;" >> $(OVERVIEW) && ID=`expr $$ID + 1` ; \
 	done ;
