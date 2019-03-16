@@ -14,7 +14,10 @@
 //    WARRANTIES, see the file, "GEM.LICENSE.TERMS" in this distribution.
 //
 /////////////////////////////////////////////////////////
-// based on code written by Lluis Gomez i Bigorda ( lluisgomez _at_ hangar _dot_ org ) (pix_opencv)
+// 
+// based on code written by Lluis Gomez i Bigorda 
+// lluisgomez _at_ hangar _dot_ org
+// 
 // Template for pix_opencv class
 
 #include "pix_opencv_template.h"
@@ -51,7 +54,9 @@ pix_opencv_template :: ~pix_opencv_template()
 /////////////////////////////////////////////////////////     
 void pix_opencv_template :: processImage(imageStruct &image)
 { 
-    cv::Mat imgMat( image.ysize, image.xsize, CV_8UC1, image.data, image.csize*image.xsize); // just transform imageStruct to IplImage without copying data
+    // just transform imageStruct to IplImage without copying data
+    cv::Mat imgMat( image.ysize, image.xsize, CV_8UC1, 
+    image.data, image.csize*image.xsize); 
 }
 
 /////////////////////////////////////////////////////////

@@ -16,11 +16,7 @@ LOG
 #ifndef INCLUDE_PIX_OPENCV_SURF_H_
 #define INCLUDE_PIX_OPENCV_SURF_H_
 
-#ifndef _EiC
-// #include "opencv2/nonfree/nonfree.hpp"
-// #include "opencv2/legacy/legacy.hpp"
-// #include "opencv2/legacy/compat.hpp"
-#endif
+#include "opencv2/opencv.hpp"
 
 #include "Base/GemPixObj.h"
 
@@ -28,7 +24,7 @@ LOG
 #define DSCSIZE 128
 
 /*-----------------------------------------------------------------
--------------------------------------------------------------------
+
 CLASS
     pix_opencv_surf
     
@@ -46,8 +42,8 @@ class GEM_EXPORT pix_opencv_surf : public GemPixObj
 
     public:
 
-    //////////
-    // Constructor
+        //////////
+        // Constructor
         pix_opencv_surf();
         
     protected:
@@ -60,7 +56,7 @@ class GEM_EXPORT pix_opencv_surf : public GemPixObj
         // Do the processing
         virtual void     processRGBAImage(imageStruct &image);
         virtual void     processRGBImage(imageStruct &image);
-    virtual void     processYUVImage(imageStruct &image);
+        virtual void     processYUVImage(imageStruct &image);
         virtual void     processGrayImage(imageStruct &image); 
 
         void  nightModeMess(float nightmode);
@@ -100,7 +96,7 @@ class GEM_EXPORT pix_opencv_surf : public GemPixObj
         static void  delaunayMessCallback(void *data, t_symbol *s);
         static void  pdelaunayMessCallback(void *data, t_floatarg fpoint, t_floatarg fthreshold);
 
-    // Internal Open CV data
+        // Internal Open CV data
         IplImage *orgb, *rgba, *rgb, *gray, *ogray;
         t_atom x_list[3];
 

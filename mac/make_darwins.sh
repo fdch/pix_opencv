@@ -33,7 +33,6 @@ DEPS=(
         opencv
 )
 
-
 #    Array to store .o names / basenames
 BINARY=()
 FTOBJ=''
@@ -64,6 +63,19 @@ function make_target_dir()
         mkdir $TARGET_DIR || echo "... could not create. Exiting." && exit
     fi
 }
+FTOBJ=""
+function get_facetrackerlibs()
+{
+    for i in $FTLIB/*.o
+    do
+        if [[ -f $i ]]
+        then
+            FTOBJ+=" $i"
+        else
+            echo "Skiping: $i"
+        fi
+    done
+}
 
 function get_objects()
 {
@@ -88,15 +100,7 @@ function get_objects()
         echo "Facetracker was not initialized"
         echo "$FACETRACKER_INSTRUCTIONS"
     else
-        for i in $FTLIB/*.o
-        do
-            if [[ -f $i ]]
-            then
-                FTOBJ+=" $i"
-            else
-                echo "Skiping: $i"
-            fi
-        done
+       get_facetrackerlibs
     fi
 }
 
@@ -179,6 +183,7 @@ function make_one()
     then
         echo "$src.cc does not exist. Exiting."
     else
+        get_facetrackerlibs
         if [[ ! $2 ]] || [[ "$2" == "-c" ]]
         then
         echo "Compiling $src ..."
@@ -189,7 +194,7 @@ function make_one()
         then
             echo "Linking $src ..."
             echo "$CXX -o $tar $obj $FTOBJ $LIBS"
-            $CXX -o $tar $obj $LIBS
+            $CXX -o $tar $obj $FTOBJ $LIBS
         fi
         if [[ ! $2 ]] || [[ "$2" == "-i" ]]
         then
@@ -275,6 +280,6 @@ else
         #    Copy all darwins to target dir
         rsync -aP $ROOT/${TARGET}-help.pd $ROOT/model $SRCDIR/*.pd_darwin $TARGET_DIR
         echo "Try running the following:
-        $ pd -lib Gem:pix_opencv -open $TARGET_DIR/${TARGET}-help.pd"
+        $ pd -lib Gem -path pix_opencv -open $TARGET_DIR/${TARGET}-help.pd"
     fi
 fi

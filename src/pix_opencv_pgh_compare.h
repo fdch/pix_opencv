@@ -16,11 +16,9 @@ LOG
 #ifndef INCLUDE_PIX_OPENCV_PGH_COMPARE_H_
 #define INCLUDE_PIX_OPENCV_PGH_COMPARE_H_
 
-#ifndef _EiC
-// #include "opencv2/legacy/legacy.hpp"
-// #include "opencv2/legacy/compat.hpp"
-
-#endif
+#include "opencv2/imgproc.hpp"
+#include "opencv2/imgproc/imgproc_c.h"
+#include "opencv2/core/base.hpp"
 
 #include "Base/GemPixDualObj.h"
 
@@ -50,16 +48,18 @@ class GEM_EXPORT pix_opencv_pgh_compare : public GemPixDualObj
 
         //////////
         // Do the processing
-        virtual void     processRGBA_RGBA(imageStruct &left, imageStruct &right);
-        virtual void     processRGB_RGB(imageStruct &left, imageStruct &right);
-        virtual void     processYUV_YUV(imageStruct &left, imageStruct &right);
-          virtual void     processGray_Gray(imageStruct &left, imageStruct &right);
-        
+        // virtual void     processRGBA_RGBA(imageStruct &left, imageStruct &right);
+        // virtual void     processRGB_RGB(imageStruct &left, imageStruct &right);
+        // virtual void     processYUV_YUV(imageStruct &left, imageStruct &right);
+        // virtual void     processGray_Gray(imageStruct &left, imageStruct &right);
+
+        virtual void processDualImage(imageStruct &left, imageStruct &right);
+
         //////////
         // change method used
-        void            floatMinSizeMess(float minsize);
-        void            clearMess(void);
-        void            floatCriteriaMess(float criteria);
+        void floatMinSizeMess(float minsize);
+        void clearMess(void);
+        void floatCriteriaMess(float criteria);
 
         int comp_xsize;
         int comp_ysize;
@@ -74,15 +74,15 @@ class GEM_EXPORT pix_opencv_pgh_compare : public GemPixDualObj
     
         //////////
         // Static member functions
-        static void            floatMinSizeMessCallback(void *data, float minsize);
-        static void            clearMessCallback(void *data);
-        static void            floatCriteriaMessCallback(void *data, float criteria);
+        static void floatMinSizeMessCallback(void *data, float minsize);
+        static void clearMessCallback(void *data);
+        static void floatCriteriaMessCallback(void *data, float criteria);
 
-        IplImage *rgba, *rgb, *gray;
-        IplImage *rgbar, *rgbr, *grayr;
+        // IplImage *rgba,  *rgb,  *gray;
+        // IplImage *rgbar, *rgbr, *grayr;
 
-        CvMemStorage *x_storage;
-        CvSeq        *x_bcontourr;
+        // CvMemStorage *x_storage;
+        int x_bcontourr;
 
         t_atom       rlist[5];
 

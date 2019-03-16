@@ -14,7 +14,8 @@
 //    WARRANTIES, see the file, "GEM.LICENSE.TERMS" in this distribution.
 //
 /////////////////////////////////////////////////////////
-// based on code written by Lluis Gomez i Bigorda ( lluisgomez _at_ hangar _dot_ org ) (pix_opencv)
+// based on code written by Lluis Gomez i Bigorda 
+// ( lluisgomez _at_ hangar _dot_ org ) (pix_opencv)
 // FaceTracker for pix_opencv
 
 #ifdef HAVE_FACETRACKER

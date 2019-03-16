@@ -16,20 +16,21 @@ LOG
 #ifndef INCLUDE_PIX_OPENCV_FACETRACKER_H_
 #define INCLUDE_PIX_OPENCV_FACETRACKER_H_
 
-#ifndef _EiC
+
 #include "opencv2/opencv.hpp"
-#endif
+
 
 #include "FaceTracker/Tracker.h"
 
 #include "Base/GemPixObj.h"
 
 /*-----------------------------------------------------------------
--------------------------------------------------------------------
+
 CLASS
     pix_opencv_facetracker
     
   FaceTracker implementation
+  
   * see https://github.com/kylemcdonald/FaceTracker
     
 KEYWORDS

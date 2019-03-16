@@ -34,12 +34,15 @@ pix_opencv_la_include_HEADERS = Blob.hpp \
 					pix_opencv_opticalflow.h \
 					pix_opencv_patreco.h \
 					pix_opencv_surf.h \
-					pix_opencv_template.h \
 					pix_opencv_threshold.h \
 					pix_opencv_trackKnn.h \
 					pix_opencv_warpperspective.h \
 					pix_opencv_hist_compare.h \
-					pix_opencv_lk.h
+					pix_opencv_lk.h \
+					pix_opencv_motempl.h \
+					pix_opencv_template.h \
+				    pix_opencv_pgh_compare.h \
+				    pix_opencv_calchist.h
 #					pix_opencv_knear.h
 
 OVERVIEW=../pix_opencv-help.pd
@@ -75,7 +78,11 @@ pix_opencv_la_SOURCES = pix_opencv_edge.cc \
 				  pix_opencv_calibration.cc \
 				  pix_opencv_findchessboardcorners.cc \
 				  pix_opencv_hist_compare.cc \
-				  pix_opencv_lk.cc
+				  pix_opencv_lk.cc \
+				  pix_opencv_motempl.cc \
+				  pix_opencv_template.cc \
+				  pix_opencv_pgh_compare.cc \
+				  pix_opencv_calchist.cc
 #				  pix_opencv_knear.cc
 
 
