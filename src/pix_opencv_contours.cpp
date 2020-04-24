@@ -215,12 +215,8 @@ void pix_opencv_contours :: processImage(imageStruct &image)
         
         outlet_anything(m_dataout_middle, gensym("convexitydefects"), list_size, data);
         
-<<<<<<< HEAD:src/pix_opencv_contours.cpp
-        delete data;
-=======
         if (data) delete[] data;
         data = NULL;
->>>>>>> fix-contours:src/pix_opencv_contours.cc
       }
     }
   }
