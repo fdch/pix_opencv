@@ -1,6 +1,32 @@
+<<<<<<< HEAD:src/pix_opencv_athreshold.hpp
 #pragma once
 #include <opencv2/core.hpp>
 #include <Base/GemPixObj.h>
+=======
+/*-----------------------------------------------------------------
+LOG
+    GEM - Graphics Environment for Multimedia
+
+    Adaptive threshold object
+
+    Copyright (c) 1997-1999 Mark Danks. mark@danks.org
+    Copyright (c) Günther Geiger. geiger@epy.co.at
+    Copyright (c) 2001-2002 IOhannes m zmoelnig. forum::für::umläute. IEM. zmoelnig@iem.kug.ac.at
+    Copyright (c) 2002 James Tittle & Chris Clepper
+    For information on usage and redistribution, and for a DISCLAIMER OF ALL
+    WARRANTIES, see the file, "GEM.LICENSE.TERMS" in this distribution.
+
+-----------------------------------------------------------------*/
+
+#ifndef INCLUDE_PIX_OPENCV_ATHRESHOLD_H_
+#define INCLUDE_PIX_OPENCV_ATHRESHOLD_H_
+
+// #ifndef _EiC
+// #include "opencv2/legacy/legacy.hpp"
+// #endif
+
+#include "Base/GemPixObj.h"
+>>>>>>> fix-contours:src/pix_opencv_athreshold.h
 
 /*-----------------------------------------------------------------
 -------------------------------------------------------------------
